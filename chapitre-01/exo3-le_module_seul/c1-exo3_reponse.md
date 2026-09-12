@@ -1,5 +1,4 @@
 # EXERCICE3
-## Exercice 3
 
 J'ai construit le projet `NKMath` avec la commande :
 
