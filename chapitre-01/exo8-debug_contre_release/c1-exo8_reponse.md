@@ -743,3 +743,5 @@ Voici l'ensemble des lignes qui ressortent cette difference
     with filter ("config : Release"):
         defines(["NDEBUG"]) ; optimize("Speed"); symbols (False)
 ```
+
+**Apres observations et rigueur et apres avoir taper plusieurs fois une meme commande, il revient a dire que leurs executables ont la meme taille**

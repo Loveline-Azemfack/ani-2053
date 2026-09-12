@@ -87,7 +87,7 @@ ceci a ete obtenu, apres avoir lancer la ommande suivante, pour obtenir, non seu
 
 ### INFORMATIONS DEMANDES
 #### type
-Type de NKPlatforme: c'est un projet  ecris en python et en c++  
+Type de NKPlatforme: NkPlatforme  est de type "StaticLib"
 
 #### sources
 les sources de celui ci sont tous les .cpp et tous les .h comme ecris dans son .jenga qui sont:
@@ -152,7 +152,7 @@ temoin_noms_additifs.cpp
 #### Marquons d'un point d'interrogation tout ce que nous ne comprennons pas encore
 
 ```
-? :         nkentseudependson(
+? (je ne comprends pas bien le role de selfexport) :         nkentseudependson(
         20 :         [],
         21 :         selfexport="NKPlatform",
         22 :         extra_includes=["src", "pch"],
@@ -162,12 +162,12 @@ temoin_noms_additifs.cpp
         26 :     pchsource("pch/pch.cpp")
         27 : 
 ```
-? :
+?  (ici je ne comprends pas par quoi se traduit le tiret entre ceci %{cfg.buildcfg}-%{cfg.system} ):
 ```
 targetdir("%{wks.location}/Build/Lib/%{cfg.buildcfg}-%{cfg.system}")
 ```
 
-? :
+? (qu'est ce qui se passe lorsqu'on laisse les guillemets vides):
 ```
 # Workaround: disable PCH on Android (NDK r27 + clang 18 + libc++)
 48 :         pchheader("")
@@ -175,7 +175,7 @@ targetdir("%{wks.location}/Build/Lib/%{cfg.buildcfg}-%{cfg.system}")
 50 :         usetoolchain("android-ndk")
 ```
 
-? :
+?(a quoi servent symboles et optimize) :
 ```
 with filter("config:Debug"):
 62 :         defines(["_DEBUG", "DEBUG", "NKENTSEU_DEBUG"])

@@ -803,3 +803,38 @@ Time:           1m1.6s
 Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 ```
+
+## temps de construction:
+```
+Time:           1m1.6s
+```
+
+## Contenu du fichier MonEssai.jenga avec pour reference celui du cours
+
+```
+import os
+from Jenga import *
+from jengaconfig import *
+
+with project("MonEssai"):
+    windowedapp()
+    language("C++")
+    cppdialect("C++17")
+    location(".")
+
+    files(["src/**.cpp"])
+    nkentseudependson(["NKCanvas", "NKGlad", "NKFont"], extra_includes = ["src"])
+
+    objdir("%{wks.location}/Build/Obj/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}")
+    targetdir("%{wks.location}/Build/Bin/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}")
+
+    with filter("system : Windows"):
+        usetoolchain(TC_WINDOWS)
+        links(["user 32", "gdi 32", "opengl 32", "dwmapi", "shell32"])
+
+    with filter("config : Debug"):
+        defines(["DEBUG"]); optimize("Off"); symbols(True)
+
+    with filter ("config : Release"):
+        defines(["NDEBUG"]) ; optimize("Speed"); symbols (False)
+```
