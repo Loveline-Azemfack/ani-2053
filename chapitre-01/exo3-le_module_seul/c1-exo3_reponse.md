@@ -43,9 +43,11 @@ NKMath
 |
 |── NKMemory
 │   |── NKCore
-│   
+│   |___ NKPlatform
+|
 |── NKCore
 │   |── NKPlatform
+|
 └── NKPlatform
 ```
 

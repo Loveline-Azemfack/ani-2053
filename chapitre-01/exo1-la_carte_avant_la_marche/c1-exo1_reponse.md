@@ -8,7 +8,7 @@ Parmi ces 273 projets, on a les projet de :
 - type StaticLib : 60
 - type TestSuite : 60
 - type WindowedApp : 55
-- type nombre de chaine de compilation: 17
+- type nombre de chaine de compilation: 5
 
 projet de demarrage: Sandbox
 
