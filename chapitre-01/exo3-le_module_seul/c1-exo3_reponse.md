@@ -37,16 +37,13 @@ sous forme d'arbre on peut representer comme ceci;
 NKMath
 |── NKContainers
 │   |── NKMemory
-│   │   |── NKCore
-│   │   │   |── NKPlatform
-│   │   |── NKPlatform
+│   │   
 │   |── NKCore
-│   │   |── NKPlatform
 │   |── NKPlatform
+|
 |── NKMemory
 │   |── NKCore
-│   │   |── NKPlatform
-│   |── NKPlatform
+│   
 |── NKCore
 │   |── NKPlatform
 └── NKPlatform
@@ -54,4 +51,5 @@ NKMath
 
 
 Donc l'ensemble de dependance montre que NKMath depend de tous les autres NK
+
 
