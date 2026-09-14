@@ -24,6 +24,7 @@ J'aurai aimer avoir
 Build Success
 - j'aurai voulu avoir une construction complete de celui ci
 - son .exe
+- j'aurai voulu qu'il utilise moins de temps
 ```
 
 Mais pour cela je me dis qu'il y a un peu trop d'erreur a corriger
