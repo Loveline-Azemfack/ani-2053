@@ -970,11 +970,11 @@ All tests passed for NKMath_Tests.
 
 ### Tests executees et Test reussi
 
-Avec ce resultat, on remarque que dans NKMath_tests, on a pu executer 8 test et tout les 8 tests ont reussi et l'esecution nous a coute en temos 69ms, soit 8ms par test
+Avec ce resultat, on remarque que dans NKMath_tests, on a pu executer 8 test et tout les 8 tests ont reussi et l'execution nous a coute en temos 69ms, soit 8ms par test
 
 
 **CONCLUSION**
-Alors dans Nkentseu.jenga, il existe **au total 60 test** le module NKMath compte **8 tests** et les **8tests ont bient ete executees et reussis.** et tout ceci est juste cacher a cause d ela ligne 
+Alors dans Nkentseu.jenga, il existe **au total 60 test** parmi lesquelles NKMath utilise uniqument une **suite de test qui est NKMath_Tests** contenant des test individuelles, le module NKMath compte **8 tests** et les **8 tests ont bient ete executes et reussis.** et tout ceci est juste cacher a cause de la ligne 
 ```
 dutc(enable=True)
 
