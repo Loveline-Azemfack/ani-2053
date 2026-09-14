@@ -446,7 +446,7 @@ Status:         ✓ SUCCESS
 
 ```
 
-## DEPENDANCES DIRECTS
+## LISTES DES DEPENDANCES DIRECTS
 
 Les dépendances directes de NKCanvas sont :
 - NKContainers
@@ -465,7 +465,7 @@ Les dépendances directes de NKCanvas sont :
 - NKTime
 - NKWindow
 
-### DEPENDANCES DE SES DEPENDANCES A DEUX NIVEAUX
+### LISTES DEPENDANCES DE SES DEPENDANCES A DEUX NIVEAUX
 
 A deux niveaux, on releve les dependances de ses dependances et l'ensemble se resume a:
 
@@ -486,10 +486,9 @@ A deux niveaux, on releve les dependances de ses dependances et l'ensemble se re
 
 Alors on denombre ici 14 autres dependances de ses dependances, pour rendre ceci plus explicite, on va faire un arbre qui traduit ces dependances:
 
-## Graphe de l'ensemble des depndances a deux niveaux
+## GRAPHE DE L'ENSEMBLE DES DEPENDANCES
 
 ```
-NKCanvas
 NKCanvas
 ├── NKContainers
 │   ├── NKCore
@@ -597,4 +596,4 @@ NKCanvas
 ```
 ## Nombre de projets a construire avant lui
 
-Avant de contruire donc NKCanvas il faut **15 projets** avant lui car il depend de ces 15 la.
+Avant de contruire donc NKCanvas il faut **16 projets** avant lui . Pour mieux comprendre les dependances obser bien le graphe preecedent
