@@ -257,11 +257,13 @@ Time:           3.88s
 #### TAILLE DU BINAIRE PRODUIT
 Pour cela je me sers de la commande suivante:
 ```
-(Get-Item ".\Build\Bin\Debug-Windows\MonEssai\MonEssai.exe").Length / 1KB
+$debug = (Get-ChildItem ".\Build\Lib\Debug-Windows" -Recurse -File | Measure-Object Length -Sum).Sum
+
+"Debug   : {0} octets | {1} Mo" -f $debug, [math]::Round($debug / 1MB, 3)
 ```
 Cette commande a ete obtenu apres une recherche personnelle effectuee sur IA
 ```
-137,33984375 Ko
+Debug   : 31909358 octets | 30,431 Mo
 ```
 
 ## RELEASE
@@ -731,9 +733,14 @@ Time:           50.79s
 
 ### TAILLE DU BINAIRE OBTENU
 ```
-137,33984375 Ko.
+Release : 7690690 octets | 7,334 Mo
 ```
+obtenu apres avoir taper la commande
+```
+$release = (Get-ChildItem ".\Build\Lib\Release-Windows" -Recurse -File | Measure-Object Length -Sum).Sum
 
+"Release : {0} octets | {1} Mo" -f $release, [math]::Round($release / 1MB, 3)
+```
 ## EXPLICATION DE L'OBSERVATION
 Voici l'ensemble des lignes qui ressortent cette difference
 ```
@@ -744,4 +751,4 @@ Voici l'ensemble des lignes qui ressortent cette difference
         defines(["NDEBUG"]) ; optimize("Speed"); symbols (False)
 ```
 
-**Apres observations et rigueur et apres avoir taper plusieurs fois une meme commande, il revient a dire que leurs executables ont la meme taille**
+**Apres observations et rigueur et apres avoir modifier la commande precedente qui etait "(Get-Item ".\Build\Bin\Debug-Windows\MonEssai\MonEssai.exe").Length / 1MB" pour chacune des configurations     , il revient a dire que leurs executables ont des tailles differentes.**
