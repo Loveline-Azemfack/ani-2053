@@ -294,3 +294,8 @@ Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 ```
 
+**CONCLUSION:**
+Lorsqu'on introduit une faute dans le fichier dans NKMath, le temps de compilation est donc de : **1.44s** Les projets qui ont quand meme ete construits sont : **NKPlatform
+NKCore
+NKMemory
+NKContainers**. Et le messages d'erreur nous apprend que **la construction d'un projet commence d'abord par celle de ses dependances**.
