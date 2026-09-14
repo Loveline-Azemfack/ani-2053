@@ -9,6 +9,27 @@ jenga build --target NkRef
 Resultat:
 
 ### Ce qu'il fait
+
+
+Donc on remarque que:
+- NKRef se lance mais parmi l'ensemble des projets, un ne comipile
+- il y a eu un probleme de linking
+- On arrive dons pas a produire son executable a cause d el'ensembe des erreurs
+- ce projet est construit en 1m3.9s
+
+### Ce que j'aurai voulu qu'il fasse
+
+J'aurai aimer avoir
+```
+Build Success
+- j'aurai voulu avoir une construction complete de celui ci
+- son .exe
+```
+
+Mais pour cela je me dis qu'il y a un peu trop d'erreur a corriger
+
+#### RENDU DE L'ETAT ACTUEL DU PROJET
+
 ```
 
 ╔══════════════════════════════════════════════════════════════════╗
@@ -512,18 +533,5 @@ Echecs (1) — a corriger :
 
 ```
 
-Donc on remarque que:
-- NKRef se lance mais parmi l'ensemble des projets, un ne comipile
-- il y a eu un probleme de linking
-- On arrive dons pas a produire son executable a cause d el'ensembe des erreurs
-
-### Ce que j'aurai voulu qu'il fasse
-
-J'aurai aimer avoir
-```
-Build Success
-- j'aurai voulu avoir une construction complete de celui ci
-- son .exe
-```
-
-Mais pour cela je me dis qu'il y a un peu trop d'erreur a corriger
+#### TEMPS
+Time:           1m3.9s
