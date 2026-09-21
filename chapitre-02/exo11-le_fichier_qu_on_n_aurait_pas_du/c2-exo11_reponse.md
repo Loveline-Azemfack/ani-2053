@@ -72,3 +72,4 @@ Resultat:
 
 ## CONCLUSION:
 Face aux differentes mesures obtenues avant le commit du fichier cree, apres commit et apres suppression qui sont respectivement **53700 octets**, **99942 octets**, **98082 octets**, On remarque donc qu'apres avoir supprimé le fichier, la taille de .git est toujours supérieure à sa taille initiale de 53700 octets. Cela montre que la suppression du fichier du projet ne supprime pas automatiquement les données correspondantes de l'historique Git. Le fichier reste present dans les anciens commits.
+Par ailleurs On remarque également que mon fichier faisait 10 485 760 octets, alors que la taille de .git n'a augmenté que de 46 242 octets après le premier commit. Cela s'explique par le fait que le fichier créé était rempli de zéros, et git a donc facilement compresse ces donnees la.
