@@ -85,7 +85,15 @@ Your branch is ahead of 'origin/print2' by 2 commits.
 nothing to commit, working tree clean
 ```
 
-Oups, on m'affiche travail propre, ce qui ne devrait pas etre le cas. Je vais donc verifier mes commits pour voir ce qu'il y a:
+Oups, on m'affiche travail propre, ce qui ne devrait pas être le cas. Mon git push venait pourtant d'être refusé parce que le dépôt distant contenait une modification que mon clone ne connaissait pas encore.
+
+Cela s'explique par le fait que origin/print2 correspond à l'information que mon clone possède sur la branche distante. Pour mettre à jour cette information, il faut utiliser :
+```
+git fetch origin
+```
+Qui récupère les nouvelles informations du dépôt distant sans modifier directement mes fichiers. 
+
+Je vais donc verifier mes commits pour voir ce qu'il y a:
 
 ```
 git log --oneline -8
@@ -156,7 +164,36 @@ Je le choisis tout d'abord parce que le message permet de savoir sur quoi on tra
 
 ## reconstruction
 
-Maintenant que j'ai choisi, je vais faire mon git add fichier3.cpp et ensuite mon git status pour voir l'etat du travail. Quand je le fais voici ce qui s'affiche:
+Maintenant que j'ai choisi, je vais reconstruire mon fichier fichier3.cpp. Je supprime donc les marqueurs du conflit et je garde uniquement la version que j'ai choisie.
+
+Le fichier fichier3.cpp reconstruit devient alors :
+```
+//creation de mon troisieme fichier
+
+#include <iostream>
+
+int main(){
+
+    int a, b;
+    a =3;
+    b =5;
+
+    std::cout << "la somme de " << a << " et "<< b << " est  : " <<3 +5<< std::endl;
+
+    return 0;
+}
+```
+On voit maintenant que les marqueurs <<<<<<<, ======= et >>>>>>> ont disparu et qu'il ne reste que la version finale que j'ai choisie.
+
+Ensuite, je fais :
+```
+git add fichier3.cpp
+```
+Puis je vérifie l'état du travail avec :
+```
+git status
+```
+resultat:
 
 ```
 On branch print2

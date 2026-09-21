@@ -1,54 +1,104 @@
-# EXERCICE 12: REGLES GIT D'UN PROJET
+# EXERCICE 12 : RÈGLES GIT D'UN PROJET
 
 ## nommage des branches
-Avant tout il faut d'abord que le nom d'une brance doit rfleter son role, cela veut dire que lorsqu;une personnne veux travailler dans une branche que le nom lui permette de savoir ce qu'elle doit ou ne pa sfaire dans le branche.  Ainsi notons ceci:  
-Branches principales : 
-main      → Production 
 
-La branche de production c'est d'abord la branche principale donc le **main** et ils ne devront pas travailler directement dessus, donc on peut utiliser cette convention ci pour nommer les branches:
+Avant tout il faut d'abord que le nom d'une branche doit refléter son rôle, cela veut dire que lorsqu'une personne veut travailler dans une branche, le nom lui permet de savoir ce qu'elle doit faire dans la branche et ce qu'elle ne doit pas faire.
+
+Ainsi notons ceci :
+
+**Branche principale :**
+
+`main` → Production
+
+La branche de production c'est d'abord la branche principale donc le **main** et les étudiants ne devront pas travailler directement dessus. Donc on peut utiliser cette convention pour nommer les branches :
+
 ```
 feat/user-authentication
+
 fix/login-error-message
+
 docs/update-installation
 ```
-Ici, 
-- feat(feature) renvoie aux nouvelles fonctionnalites
-- fix ici sera utiliser pour les corrections, c'est donc la qu'on arrete de nommer les branches un peu comme **modification1** 
-- docs ici c'est pour la documentation
 
-Donc ici, l'objectif de nommer les branches c'est pour eviter de travailler directement dans la branche principale et ne pas ecraser le travail des autres, donc mieux chacun fait ce qu'il a a faire dans sa branche et lorsqu'il va pousser sur github, si le chef de projet voit que sa modification est necessaire, on integrera cette derniere dans la branche principale
+Ici :
+
+* **feat** renvoie aux nouvelles fonctionnalités ;
+* **fix** sera utilisé pour les corrections, c'est donc là qu'on arrête de nommer les branches un peu comme **modification1** ;
+* **docs** est utilisé pour la documentation.
+
+Donc ici, l'objectif de nommer les branches est d'éviter de travailler directement dans la branche principale et de ne pas écraser le travail des autres. Chacun fait donc ce qu'il a à faire dans sa branche et lorsqu'il va pousser sur GitHub, son travail sera relu avant d'être intégré dans le **main**.
 
 ## contenu d'un commit
-En ce qui concerne le contenu de commit, ils devront utiliser une version commune pour que chaque modification puisse etre explicite lors du **push** donc ils peuvent ecrire leur contenu de cette convention:
-```
-type (scope): description
-```
-* leurs commits ne doivent pas ausssi etre trop longs ca doit etre court, clair et explicite
 
-Par exemple si j'ai modifier qulque chose dans la branche docs je mets
+En ce qui concerne le contenu des commits, ils devront utiliser une version commune pour que chaque modification soit explicite lors du **push**. Ils peuvent donc écrire leur contenu avec cette convention :
+
 ```
-docs (readme): fix typo introduction"
+type(scope): description
 ```
-la le type est docs et c'est dans le readme qu'il y a eu une modification et il decrit qu'il a modifier une faute de frappe dans l'intoduction. La on voit bien ce que peut contenir le changement du fichier a ce moment la.
-* Avant de commit il faut toujours faire un **git status** pour voir l'etat de son travail  
-* Chaque ajout de nouvelles fonctionnalites doit avoir son propre commit, ne pas melanger plusieurs idees afin de ne pas embrouiller son relecteur
+
+Par exemple, si j'ai modifié quelque chose dans la branche `docs`, je peux mettre :
+
+```
+docs(readme): fix typo introduction
+```
+
+Là, le type est **docs**, le scope est **readme** et la description indique qu'une faute de frappe a été corrigée dans l'introduction.
+
+Pour que la règle soit vérifiable, un commit doit respecter les conditions suivantes :
+
+* un commit doit contenir **une seule idée ou une seule modification liée** ;
+* le message doit respecter la forme `type(scope): description` ;
+* le message doit permettre au relecteur de comprendre le changement en **moins d'une minute** ;
+* une nouvelle fonctionnalité importante ne doit pas être mélangée avec une correction sans rapport ;
+* avant de faire le commit, il faut toujours faire un **git status** pour voir l'état du travail.
+
+Si le changement contient plusieurs idées différentes, il faut les séparer en plusieurs commits afin de faciliter la relecture.
 
 ## qui relit quoi
 
-Pour la relecture, puisqu'il s'agit d'un projet collectif, un seul etudiant ne peut pas approuver son propre travail lui meme seul, il doit aussi avoir l'avis des autres avant de l'integrer dans le main, c'est donc pour ca que chaque fois qu'un etudiant fera une modification, l'etudiant pouvant relire et comprendre ses modifiations devra  le faire afin de voir si il y a des incoherences ou pas.
-Le travail peut être proposé sous forme de **Pull Request** afin que l'autre étudiant puisse effectuer la relecture avant le merge. **Donc avant tout il faudra definir quii devra relire une modification de type (feat, docs ou encore fix) ou du moins etablir un autre critere de choix  fonction de son travail et de ses performance car on ne peut pas dire a une personne qui est centree sur la partie documentation de relire le travail d'une personne qui a fait une modification de tupe 'feat'** , donc on devra faire de telle sorte que si c'est l'etudiant **bob** par exemple qui doit relire le travail de l'etudiant **john** qu'on attende d'aord son approbation avant d'integrer le travail de john dans le main.
+Pour la relecture, puisqu'il s'agit d'un projet collectif, un étudiant ne peut pas approuver son propre travail lui-même avant de l'intégrer dans le **main**.
 
-##  ce qui est interdit
+Comme nous sommes quatre étudiants, nous définissons dès le début qui relit le travail de chacun en fonction de son rôle dans le projet.
+
+* **Alice** → développement des nouvelles fonctionnalités (`feat/*`) → relue par **Bob**, qui travaille aussi sur la partie développement ;
+* **Bob** → corrections et modifications techniques (`fix/*`) → relu par **Alice** ;
+* **John** → documentation (`docs/*`) → relu par **Marie** ;
+* **Marie** → tests et vérification de l'intégration → relue par **Bob**.
+
+Ainsi, on ne demande pas à une personne qui travaille uniquement sur la documentation de relire une fonctionnalité technique qu'elle ne connaît pas. Le choix du relecteur dépend donc de la partie du projet sur laquelle il travaille et de sa capacité à comprendre la modification.
+
+Le travail est proposé sous forme de **Pull Request**. Le relecteur doit vérifier le contenu du changement avant le merge. Tant que le relecteur désigné n'a pas approuvé la Pull Request, elle ne doit pas être fusionnée dans le **main**.
+
+## ce qui est interdit
+
 Pour la part des interdits dans un travail collectif :
-* La premiere des chose est travailler sur la branche principale;
-* integrer dans le main un travail qui n'a pas ete relus
-* Faire des commits ambigue, ceux qui melangent plusieurs idees dans ue seule description
-* Fusionner sa propre banche avec main
-* ecraser le travail qui a deja ete integrer dans la branche principae avec **git push --force** 
-* effacer le commit d'une autre personnes ou pour l'historique du travail 
-* pousser un travail qui ne compile pas consciement a vouloir qu'on l'integre dans la branche principale
-* faire un **git reset --hard** sur le main, car le **--hard** detruit et c'est l'une des commandes les plus dangereuse dans un travail collectif;
 
-* Ne pas mettre ses donnees securiser dans un depot un peu comme **les mots de passe, les cles d'acces** 
+* travailler directement sur la branche principale ;
+* intégrer dans le **main** un travail qui n'a pas été relu ;
+* fusionner sa propre branche avec le **main** ;
+* faire des commits ambigus qui mélangent plusieurs idées dans une seule modification ;
+* écraser le travail qui a déjà été intégré dans la branche principale avec **git push --force** ;
+* effacer le commit d'une autre personne ou modifier volontairement l'historique partagé ;
+* pousser volontairement un travail qui ne compile pas dans le but de le faire intégrer dans la branche principale ;
+* faire un **git reset --hard** sur le **main**, car cette commande peut supprimer les modifications présentes dans le répertoire de travail ;
+* mettre dans le dépôt des données secrètes comme les **mots de passe** ou les **clés d'accès**.
+
 ## ce qu'on fait quand quelqu'un casse la branche principale
-Pour cette partie il y a pas deux chose que deux faire recours directement au **git revert** avec l'accord des autres membres, car il faut d'abord identifier le commit qui a provoque cela et  si on trouve que ca a plus fait du mal que de bien, utiliser un **git revert** et puis on doit verifier que le projet fonctionne toujours normalement 
+
+Si quelqu'un casse la branche principale, on ne continue pas les intégrations comme si de rien n'était.
+
+D'abord, la personne qui constate le problème doit **prévenir immédiatement les autres membres du groupe** afin que tout le monde sache que le **main** est temporairement bloqué.
+
+Ensuite, le **responsable de l'intégration, Marie**, identifie le commit qui a provoqué le problème. Si ce commit doit être annulé, elle utilise :
+
+```
+git revert <commit>
+```
+
+Le `git revert` crée un nouveau commit qui annule les changements du commit responsable sans supprimer l'historique.
+
+Après le revert, Marie vérifie que le projet fonctionne de nouveau normalement et que le code compile. Un autre membre du groupe doit également vérifier le résultat.
+
+Tant que cette vérification n'est pas terminée, **aucune nouvelle intégration dans le main ne doit être faite**.
+
+Une fois que le **main** est de nouveau fonctionnel et que la résolution a été vérifiée, les intégrations peuvent reprendre normalement avec les Pull Requests et les relectures prévues.

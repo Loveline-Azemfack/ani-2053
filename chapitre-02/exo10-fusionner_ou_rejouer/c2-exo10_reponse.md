@@ -342,91 +342,63 @@ Donc git a crée alors un nouveau commit de fusion d'apres le graph :
 a2e0563 Merge branch 'test-rebase' into test-merge
 ```
 ## Le rebase
-Ici nous allons maintenant faire la même intégration mais cette fois avec le **rebase**.
-Je commence par retourner sur la branche **print2** :
+Pour comparer correctement le rebase avec la fusion, je vais refaire cette expérience dans une deuxième copie du dépôt. Cette copie doit partir du même point de départ que la première copie, c'est-à-dire avant que la fusion soit réalisée.
+Je me place donc sur la branche print2 :
 ```
 git switch print2
 ```
-Je vérifie que je suis bien sur cette branche et qu'il n'y a pas de modification en cours.
-Ensuite je crée une nouvelle branche pour faire le rebase :
+Je crée ensuite les mêmes branches et je fais les mêmes modifications que dans la première copie.
+Je crée la branche test-merge :
 ```
-git switch -c test-rebase-rejouer
+git switch -c test-merge
 ```
-Sur cette branche je fais la même modification que précédemment dans **fichier2.cpp**. mais cette fois sur une autre ligne
-Ensuite je fais :
+Je fais la modification prévue dans fichier2.cpp, puis je fais :
 ```
 git add fichier2.cpp
 ```
-et je commit:
+et :
 ```
-git commit -m "modification pour rejouer"
+git commit -m "modification pour le merge"
 ```
-Resultat :
+Je retourne ensuite sur print2 :
 ```
-[... test-rebase-rejouer efb3def] modification pour rejouer
+git switch print2
 ```
-Je vais ensuite faire le rebase avec la branche **test-merge** :
+Puis je crée la branche test-rebase :
+```
+git switch -c test-rebase
+```
+Je fais la même modification que dans la première expérience, puis :
+```
+git add fichier2.cpp
+```
+et :
+```
+git commit -m "modification pour le rebase"
+```
+À ce moment, mes deux branches partent donc du même point de départ, comme dans l'expérience de fusion.
+Cette fois, au lieu de faire une fusion, je me place sur test-rebase :
+```
+git switch test-rebase
+```
+Puis je fais :
 ```
 git rebase test-merge
 ```
-ce qui reussi
-Pour vérifier ce qui s'est passé, je regarde mon historique avec en observant mes 10 dernieres lignes:
+Le rebase reprend alors mon commit et le rejoue au-dessus de test-merge.
+Je vérifie ensuite le graphe avec :
 ```
-git log --oneline --graph --all -10
+git log --oneline --graph --all
 ```
-Resultat:
+Je peux alors comparer ce résultat avec le graphe obtenu précédemment avec git merge.
 
-```
-* d49209f (HEAD -> test-rebase-rejouer) modification pour rejouer
-*   a2e0563 (test-merge) Merge branch 'test-rebase' into test-merge
-|\  
-| * 5c585fb (test-rebase) modification pour le rebase tentative2
-* | cc39a56 modification pour le merge tentative2
-|/  
-*   a464635 (origin/print2, origin/HEAD, print2) chapitre-02: creer un conflit (clone2), conflit resolu
-|\  
-| *   885a2e6 chapitre-02: creer un conflit (clone1)
-| |\  
-| * | 18f5950 chapitre-02: creer un conflit (clone1)
-| * | 3e8532b declaration d'un ajout pour modification
-* | | 788488c chapitre-02: creer un conflit (clone2)
-| | | * c8e470c (origin/integration-rebase, integration-rebase, integration-merge-et-rebase) chapitre-02: creer un conflit (clone2)
-```
-On remarque que mon ancien commit **efb3def** n'est plus présent dans le graphe et qu'il a été remplacé par **d49209f**.
-Cela veut dire que Git a rejoué ma modification et a créé un nouveau commit en modifiant mon identifiant.
-On remarque aussi que le commit **a2e0563** qui correspond à la fusion se trouve avant mon nouveau commit **d49209f**.
-Donc ici, avec le rebase, ma modification a été rejouée au-dessus de la branche **test-merge**. comme mentionnee dans le cours
+## EXPLICATION DE LA DIFFERENCE OBTENUE SUR LES GRAPHES
 
-**## EXPLICATION DE LA DIFFERENCE OBTENU SUR LES GRAPHES**
+Lorsqu'on regarde les deux graphes obtenus à partir du même point de départ, on voit une différence entre les deux méthodes.
+Dans le premier graphe, obtenu avec la fusion, les deux branches divergent puis se rejoignent avec un commit de fusion. Le graphe reste donc ramifié.
+Dans le deuxième graphe, obtenu avec le rebase, le commit de test-rebase est rejoué au-dessus de test-merge. Le graphe obtenu est donc plus linéaire et il n'y a pas de nouveau commit de fusion.
+On remarque aussi que le commit rejoué avec le rebase possède un nouvel identifiant, car Git recrée le commit sur une nouvelle base.
+On peut donc dire que la fusion conserve les deux historiques et crée un commit de fusion pour les réunir, tandis que le rebase reprend les commits et les rejoue sur une nouvelle base.
 
-Lorsqu'on regarde les deux graphes suivants:
-
-```text
-*   a2e0563 (HEAD -> test-merge) Merge branch 'test-rebase' into test-merge
-|\
-| * 5c585fb (test-rebase) modification pour le rebase tentative2
-* | cc39a56 modification pour le merge tentative2
-|/
-* a464635 (origin/print2, origin/HEAD, print2) chapitre-02: creer un conflit (clone2), conflit resolu
-```
-
-Et:
-
-```text
-* d49209f (HEAD -> test-rebase-rejouer) modification pour rejouer
-*   a2e0563 (test-merge) Merge branch 'test-rebase' into test-merge
-|\
-| * 5c585fb (test-rebase) modification pour le rebase tentative2
-* | cc39a56 modification pour le merge tentative2
-|/
-* a464635 (origin/print2, origin/HEAD, print2) chapitre-02: creer un conflit (clone2), conflit resolu
-```
-
-* La premiere remarque intervient d'abord sur l'organisation, le premier graphe a une organisation qui reste ramifiée avec les deux branches qui se rejoignent ensuite en un point avec le commit de fusion **a2e0563**. Le deuxième graphe garde aussi cette partie mais on remarque qu'un nouveau commit **d49209f** est placé au-dessus du commit de fusion. Donc ici le rebase a rejoué mon commit sur une nouvelle base.
-* Ensuite on remarque un changement de l'identifiant du commit. Avant le rebase mon commit était **efb3def**, mais après le rebase il devient **d49209f**. Cela montre que Git a recréé le commit lorsqu'il a rejoué ma modification sur la nouvelle base.
-  On peut donc dire là que lorsque l'intégration par fusion réunit les historiques de chacune des branches créées, elle garde un graphe ramifié et crée un commit de fusion comme **a2e0563**.
-  Tandis que l'intégration en rejouant reprend les commits et les rejoue sur une nouvelle base. Dans mon cas, mon commit **efb3def** a donc été recréé sous l'identifiant **d49209f**.
-
-**## PREFERENCE**
-
-Moi je préfère celui en rejouant car je trouve que le commit rejoué est placé directement au-dessus de la nouvelle base, ce qui me permet de suivre plus facilement la modification.
+## PREFERENCE
+Moi je préfère celui en rejouant car je trouve que le graphe est plus linéaire et plus facile à lire et à comprendre. ca n'embrouille donc pas dans la mesure ou les yeus voient clairement ce qui se passe.
