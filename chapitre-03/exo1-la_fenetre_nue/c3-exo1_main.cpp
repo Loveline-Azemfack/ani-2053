@@ -1,6 +1,7 @@
 # include "NKWindow/NKWindow.h"
 # include "NKWindow/NKMain.h"
 
+using namespace nkentseu;
 int nkmain(const NkEntryState &state){
     NkWindowconfig cfg;
     cfg.title = "Ma fenetre 1";
@@ -13,7 +14,11 @@ int nkmain(const NkEntryState &state){
         return -1;
     }
 
-    while (window.IsOpen()){}
+    while (window.IsOpen()){
+        while (window.PollEvent(event)) {
+            events.PollEvents();
+        }
+    }
     
     return 0;
 }

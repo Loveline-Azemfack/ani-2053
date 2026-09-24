@@ -19,7 +19,7 @@ celle ci c'est la boucle qui devra la garder ouverte c'est plus tard qu'on rempl
 Ici c'est lorsque window.IsOpen egale false alors la fenetre se ferme et return 0 termine le programme.
 
 ## COMPTE DES LIGNES
-Mon programme fait au total **19** lignes de codes et l'espace entre les lignes, c;est a dire l'interligne qui fais meme peut une ligne y est compris, si on ne compte pas l'espace entre lignes, alors jai **15** lignes de code.
+Mon programme fait au total **19** lignes de codes et l'espace entre les lignes  y est compris. si on ne compte pas l'espace entre lignes, alors jai **20** lignes de code.
 
 ## RETROUVONS CHACUNE DANS LE CHAPITRE
 D'apres ce programme fourni par le chapitre: 
@@ -56,3 +56,7 @@ Les lignes retrouvees dans  ce chapitre sont:
 *  while (window.IsOpen()){}: c'est pour garder la fenetre ouvert, le chapitre indique qu'on pourra y mettre les evenements apres
 
 * return 0: pour terminer le programe;
+
+
+## DIFFICULTES
+Il faut noter que j'ai rencontree une difficultee pour reconstruire la fenetre avec le plus petit programme fourni par le chapitre car ca ne  reconnaissait pas les modules window ou windowcnfig. Pour cela, j'ai parcourue le tutoriel **fenetre-01** de nkentseu et j'a vu un **namespace nkentseu** et c'est quand je l'ai introduit que j'ai pu **build** mon programme et enfin voir ma fenetre
