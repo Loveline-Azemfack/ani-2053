@@ -2,6 +2,7 @@
 # include "NKWindow/NKMain.h"
 #include "NKEvent/NkWindowEvent.h"
 #include "NKTime/NkClock.h"
+#include <iostream>
 
 using namespace nkentseu;
 int nkmain(const NkEntryState &state){

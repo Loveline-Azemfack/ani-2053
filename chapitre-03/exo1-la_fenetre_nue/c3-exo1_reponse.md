@@ -48,7 +48,96 @@ return 0;
 permet de terminer normalement le programme.
 
 ## COMPTE DES LIGNES
-Mon programme fait au total **37** lignes de codes et l'espace entre les lignes  y est compris. si on ne compte pas l'espace entre lignes, alors jai **31** lignes de code.
+Mon programme fait au total **38** lignes de codes et l'espace entre les lignes  y est compris. si on ne compte pas l'espace entre lignes, alors jai **32** lignes de code.
+
+## PREUVE DE DONSTRUCTION ET D'EXECUTION
+### CONSTRUCTION
+```
+
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
+║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
+║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
+║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
+║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
+║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
+║                                                                  ║
+║             Multi-platform C/C++ Build System v2.8.0             ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Loading workspace...
+D:\Projets\Rihen\JENGA+NKENTSEU\FirstWindow\pop\NewWindow\NewWindow.jenga:15: SyntaxWarning: invalid escape sequence '\L'
+  useconfig("Loveline\Loveline.jenga")
+
+Configuration: Debug
+Target:        Windows x86_64
+Toolchain:     clang-mingw
+
+Build Order (1 projects):
+  1. MyWindow [CONSOLE_APP]
+
+
+╔══════════════════════════════════════════════════════════════════════════════════════════════╗
+║  Project: MyWindow                                                        Kind: CONSOLE_APP  ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+
+ℹ Found 1 source file(s)
+✓   [1/1] Compiled: main.cpp
+ℹ Linking...
+✓ Built: Build\Bin\Debug-Windows\MyWindow\MyWindow.exe
+
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│  ✓ Build Successful                                                             Time: 2.26s  │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════════
+                                BUILD COMPLETED                                 
+════════════════════════════════════════════════════════════════════════════════
+Projects Built:  1/1
+Time:           2.26s
+Status:         ✓ SUCCESS
+════════════════════════════════════════════════════════════════════════════════
+```
+#### TEMPS DE CONSTRUCTION
+Time:           2.26s
+
+### EXECUTION
+```
+
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
+║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
+║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
+║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
+║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
+║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
+║                                                                  ║
+║             Multi-platform C/C++ Build System v2.8.0             ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+D:\Projets\Rihen\JENGA+NKENTSEU\FirstWindow\pop\NewWindow\NewWindow.jenga:15: SyntaxWarning: invalid escape sequence '\L'
+  useconfig("Loveline\Loveline.jenga")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ▶  EXECUTION  —  MyWindow.exe
+     D:\Projets\Rihen\JENGA+NKENTSEU\FirstWindow\pop\NewWindow\Build\Bin\Debug-Windows\MyWindow\MyWindow.exe
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+fenetre cree avec succes!!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ◀  FIN D'EXECUTION  —  termine normalement  (33.26s)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+On remarque bien le message suivant: **fenetre cree avec succes!!**
+
+#### CAPTURE VIDEO
+<video controls width="700">
+  <source src="exo1-print3.mp4" type="video/mp4">
+</video>
 
 ## RETROUVONS CHACUNE DANS LE CHAPITRE
 
@@ -66,11 +155,32 @@ D'après le programme fourni dans le chapitre, j'ai retrouvé plusieurs élémen
 
 * `while (running && window.IsOpen())` : dans mon programme, cette boucle permet de maintenir la fenêtre ouverte tout en traitant les événements.
 
-* `events.PollEvents()` : il permet de traiter les événements de la fenêtre.
-
 * `return 0` : il permet de terminer normalement le programme.
 
-Mon programme est donc basé sur le programme minimal présenté dans le chapitre, mais j'ai ajouté la gestion des événements et la fermeture de la fenêtre.
+Les lignes suivantes ont été ajoutées par moi pour compléter le programme du chapitre :
+
+* `#include "NKEvent/NkWindowEvent.h"` : je l'ai ajouté pour pouvoir utiliser l'événement de fermeture de la fenêtre.
+
+* `#include "NKTime/NkClock.h"` : je l'ai ajouté pour pouvoir utiliser `NkClock::Sleep`.
+
+* `bool running = true` : je l'ai ajouté pour pouvoir contrôler la boucle du programme.
+
+* `NkEventSystem &events = NkEvents()` : je l'ai ajouté pour récupérer le système de gestion des événements.
+
+* `events.AddEventCallback<NkWindowCloseEvent>(...)` : je l'ai ajouté pour détecter lorsque l'utilisateur demande la fermeture de la fenêtre.
+
+* `running = false` : je l'ai ajouté pour arrêter la boucle lorsque l'utilisateur ferme la fenêtre.
+
+* `events.PollEvents()` : je l'ai ajouté dans la boucle pour récupérer et traiter les événements. Cela permet aussi à la fenêtre de continuer à répondre.
+
+* `NkClock::Sleep((int64)10)` : je l'ai ajouté pour faire une courte pause entre deux passages dans la boucle.
+
+* `window.Close()` : je l'ai ajouté pour fermer explicitement la fenêtre avant de terminer le programme.
+
+* `std::cout<<"fenetre cree avec succes!!";` : je l'ai ajouté pour afficher un message permettant de vérifier que la fenêtre a bien été créée.
+
+Mon programme est donc basé sur le programme minimal présenté dans le chapitre, mais certaines lignes ont été ajoutées par moi pour gérer les événements, maintenir la fenêtre réactive et permettre sa fermeture propre.
+
 
 
 ## DIFFICULTES
