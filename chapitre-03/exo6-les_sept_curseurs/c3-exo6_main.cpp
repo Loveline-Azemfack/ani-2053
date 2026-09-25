@@ -69,7 +69,7 @@ int nkmain(const NkEntryState &state) {
         }
     );
 
-events.AddEventCallback<NkMouseMoveEvent>(
+    events.AddEventCallback<NkMouseMoveEvent>(
         [&](NkMouseMoveEvent *e) {
 
             auto taille = window.GetSize();
@@ -78,67 +78,38 @@ events.AddEventCallback<NkMouseMoveEvent>(
             float H = (float)taille.y;
 
             float x = (float)e->GetX();
-            float y = (float)e->GetY();
 
-            // -----------------------------
             // ZONE 1
-            // -----------------------------
-            if (x < W / 3 && y < H / 2) {
+            if (x < W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::Arrow);
             }
 
-            // -----------------------------
             // ZONE 2
-            // -----------------------------
-            else if (x >= W / 3 &&
-                     x < 2 * W / 3 &&
-                     y < H / 2) {
-
+            else if (x < 2 * W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::TextInput);
             }
 
-            // -----------------------------
             // ZONE 3
-            // -----------------------------
-            else if (x >= 2 * W / 3 &&
-                     y < H / 2) {
-
+            else if (x < 3 * W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::Hand);
             }
 
-            // -----------------------------
             // ZONE 4
-            // -----------------------------
-            else if (x < W / 3 &&
-                     y >= H / 2) {
-
+            else if (x < 4 * W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::ResizeNS);
             }
 
-            // -----------------------------
             // ZONE 5
-            // -----------------------------
-            else if (x >= W / 3 &&
-                     x < 2 * W / 3 &&
-                     y >= H / 2 &&
-                     y < 2 * H / 3) {
-
+            else if (x < 5 * W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::ResizeWE);
             }
 
-            // -----------------------------
             // ZONE 6
-            // -----------------------------
-            else if (x >= 2 * W / 3 &&
-                     y >= H / 2 &&
-                     y < 2 * H / 3) {
-
+            else if (x < 6 * W / 7) {
                 window.SetCursor(NkWindow::NkCursorType::ResizeNWSE);
             }
 
-            // -----------------------------
             // ZONE 7
-            // -----------------------------
             else {
                 window.SetCursor(NkWindow::NkCursorType::ResizeNESW);
             }
