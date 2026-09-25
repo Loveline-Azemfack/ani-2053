@@ -37,10 +37,10 @@ int nkmain(const NkEntryState &state) {
             running = false;
         }
     );
-
+    std::cout<<"valeur demande Taille ->: " <<cfg.minWidth <<" x " << cfg.minHeight<< std::endl;
     events.AddEventCallback<NkWindowResizeEvent>(
         [](NkWindowResizeEvent *e) {
-            logger.Info("Taille : {} x {}", e->GetWidth(), e->GetHeight());
+            logger.Info("Valeur obtenue -> Taille : {} x {}", e->GetWidth(), e->GetHeight());
         }
     );
 
