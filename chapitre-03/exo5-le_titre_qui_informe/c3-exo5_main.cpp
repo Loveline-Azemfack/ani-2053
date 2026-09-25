@@ -14,15 +14,14 @@ int nkmain(const NkEntryState &state) {
     cfg.width = 1280;
     cfg.height = 720;
 
-    //cfg.minWidth = 600;
-    //cfg.minHeight = 400;
     cfg.resizable = true;
     cfg.movable = true;
-    cfg.closable =  true;
+    cfg.closable = true;
     cfg.minimizable = true;
     cfg.maximizable = true;
     cfg.canFullscreen = true;
     cfg.modal = true;
+
     NkWindow window(cfg);
 
     if (!window.IsValid()) {
@@ -38,41 +37,38 @@ int nkmain(const NkEntryState &state) {
         }
     );
 
-    /*auto windowSize = window.GetSize();
-    auto surface = window.GetSurfaceDesc();
-
-    logger.Info(
-        "Fenetre : {} x {} | Surface : {} x {} | Facteur d'echelle (DPI) : {}",
-        windowSize.x,
-        windowSize.y,
-        surface.width,
-        surface.height,
-        window.GetDpiScale()
-    );*/
     bool EstModifie = false;
+
+    auto MettreAJourTitre = [&]() {
+        auto taille = window.GetSize();
+
+        NkString title = cfg.title;
+
+        if (EstModifie)
+            title += "*";
+
+        title += " - ";
+        title += NkString::Fmtf("%u", taille.x);
+        title += " x ";
+        title += NkString::Fmtf("%u", taille.y);
+
+        window.SetTitle(title);
+    };
+
+    // Titre initial : pas d'astérisque
+    MettreAJourTitre();
+
+    // Le redimensionnement est considéré comme une modification
     events.AddEventCallback<NkWindowResizeEvent>(
         [&](NkWindowResizeEvent *) {
-
-            auto taille = window.GetSize();
-
-            NkString title = cfg.title;
-
-            if (!EstModifie)
-                title += "*";
-
-            title += " - ";
-            title += NkString::Fmtf("%u", taille.x);
-            title += " x ";
-            title += NkString::Fmtf("%u", taille.y);
-
-            window.SetTitle(title);
+            EstModifie = true;
+            MettreAJourTitre();
         }
     );
 
     while (running && window.IsOpen()) {
         events.PollEvents();
         NkClock::Sleep((int64)10);
-
     }
 
     window.Close();
