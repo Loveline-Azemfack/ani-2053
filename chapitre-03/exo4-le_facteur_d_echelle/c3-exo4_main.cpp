@@ -41,16 +41,21 @@ int nkmain(const NkEntryState &state) {
     auto windowSize = window.GetSize();
     auto surface = window.GetSurfaceDesc();
 
-    logger.Info(
-        "Fenetre : {} x {} | Surface : {} x {} | Facteur d'echelle (DPI) : {}",
-        windowSize.x,
-        windowSize.y,
-        surface.width,
-        surface.height,
-        window.GetDpiScale()
-    );
+    logger.Info("Window X : {}", windowSize.x);
+    logger.Info("Window Y : {}", windowSize.y);
 
+    logger.Info("Surface width : {}", surface.width);
+    logger.Info("Surface height : {}", surface.height);
 
+    logger.Info("DPI Scale : {}", window.GetDpiScale());
+
+    auto width = windowSize.x;
+    auto height = windowSize.y;
+    auto surfaceWidth = surface.width;
+    auto surfaceHeight = surface.height;
+    auto dpi = window.GetDpiScale();
+
+    std::cout<<"Fenetre : "<< width << " X " <<height <<" | Surface : "<< surface.width << " X " <<surface.height<< " | Facteur d'echelle (DPI) : "<< window.GetDpiScale() << std::endl;
     while (running && window.IsOpen()) {
         events.PollEvents();
         NkClock::Sleep((int64)10);
