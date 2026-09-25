@@ -308,8 +308,10 @@ J'ai également effectué le test demandé dans le deuxième volet en définissa
 
 ### Preuve
 
-J'ajoute une capture d'écran ou une courte vidéo montrant le fonctionnement des différentes zones et le test du deuxième volet.
-<video controls src="Enregistrement de l'écran 2026-09-25 070744.mp4" title="preuve1"> </video>
+J'ajoute une capture d'écran ou une courte vidéo montrant le fonctionnement des différentes zones
+<video controls width="700">
+  <source src="test1.mp4" type="video/mp4">
+</video>
 
 
 ## TEST 2
@@ -454,6 +456,14 @@ Le programme démarre donc avec le curseur Hand, mais aucun changement de curseu
 ### DESCRIPTION DE CE QUI SE PASSE AU SURVOL
 
 Lorsque je déplace la souris dans les différentes zones de la fenêtre, le curseur reste inchangé et conserve la forme de la main pendant tout le déplacement.
+
+
+### Preuve
+
+J'ajoute une capture d'écran ou une courte vidéo montrant le fonctionnement de ce deplacement
+<video controls width="700">
+  <source src="test2.mp4" type="video/mp4">
+</video>
 
 ## RESUME
 
