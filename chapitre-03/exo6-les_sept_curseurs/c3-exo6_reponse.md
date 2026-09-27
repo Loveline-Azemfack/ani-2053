@@ -332,15 +332,6 @@ int nkmain(const NkEntryState &state) {
     cfg.width = 1280;
     cfg.height = 720;
 
-    //cfg.minWidth = 600;
-    //cfg.minHeight = 400;
-    cfg.resizable = true;
-    cfg.movable = true;
-    cfg.closable =  true;
-    cfg.minimizable = true;
-    cfg.maximizable = true;
-    cfg.canFullscreen = true;
-    cfg.modal = true;
     NkWindow window(cfg);
 
     if (!window.IsValid()) {
@@ -368,25 +359,6 @@ int nkmain(const NkEntryState &state) {
         window.GetDpiScale()
     );*/
     window.SetCursor(NkWindow::NkCursorType::Hand);
-    bool EstModifie = false;
-    events.AddEventCallback<NkWindowResizeEvent>(
-        [&](NkWindowResizeEvent *) {
-
-            auto taille = window.GetSize();
-
-            NkString title = cfg.title;
-
-            if (!EstModifie)
-                title += "*";
-
-            title += " - ";
-            title += NkString::Fmtf("%u", taille.x);
-            title += " x ";
-            title += NkString::Fmtf("%u", taille.y);
-
-            window.SetTitle(title);
-        }
-    );
 /*
     events.AddEventCallback<NkMouseMoveEvent>(
         [&](NkMouseMoveEvent *e) {
@@ -456,7 +428,11 @@ Le programme démarre donc avec le curseur Hand, mais aucun changement de curseu
 ### DESCRIPTION DE CE QUI SE PASSE AU SURVOL
 
 Lorsque je déplace la souris dans les différentes zones de la fenêtre, le curseur reste inchangé et conserve la forme de la main pendant tout le déplacement.
-
+Et on peut  remarquer cette persistance grace a cette ligne de code:
+```cpp
+    window.SetCursor(NkWindow::NkCursorType::Hand);
+```
+qui impose le ype du curseur au demarrage
 
 ### Preuve
 
