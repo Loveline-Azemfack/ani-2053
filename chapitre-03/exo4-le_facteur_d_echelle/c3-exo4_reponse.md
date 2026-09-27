@@ -68,4 +68,4 @@ j'etais d'abord a 100% maintenat je suis passee a 125% et quand je recompile et 
 [2026-09-25 09:31:28.209] [INF] [default] [main.cpp:50 in nkmain] -> DPI Scale : 1.25
 Fenetre : 1278 X 712 | Surface : 1278 X 712 | Facteur d'echelle (DPI) : 1.25
 ```
-Voici donc l'ensemble du travail en gros
+**CONCLUSION: grace a cette analyse, on remarque qu'a 100 % d'échelle Windows, j'obtiens une fenêtre de 1280 × 720, une surface de 1280 × 720 et un facteur DPI de 1. Après avoir réglé l'échelle Windows à 125 %, j'obtiens une fenêtre de 1278 × 712, une surface de 1278 × 712 et un facteur DPI de 1.25, cela veut dire que plus le facteur d'echelle est grand plus la taille de window et de surface augmentent. Cependant il reste une grosse difference a relever qui est celle de comprendre pourquoi window et surfae ont les memes dimensions? Les recherches contnuent** 
