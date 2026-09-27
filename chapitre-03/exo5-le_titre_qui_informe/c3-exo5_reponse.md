@@ -1,7 +1,5 @@
-# EXERCICE 5:
-
-Pour réaliser cet exercice, j'ai dû effectuer un travail de recherche afin de comprendre comment mettre à jour le titre de la fenêtre au bon moment.
-
+# EXERCICE 5: Le titre qui informe
+Pour réaliser ceci, j'ai due effectuer un travail de recherche afin de comprendre comment mettre à jour le titre de la fenêtre au bon moment.
 J'ai d'abord essayé de gérer l'affichage du titre directement, mais cela ne permettait pas de mettre à jour correctement la taille lorsque la fenêtre était redimensionnée.
 
 J'ai donc utilisé un `AddEventCallback<NkWindowResizeEvent>` afin que le titre soit mis à jour lorsqu'un redimensionnement de la fenêtre se produit.
@@ -45,7 +43,7 @@ Par exemple, au lancement, le titre peut être:
 
 Après un redimensionnement, il devient par exemple:
 
-`Ma fenetre* - 1000 x 600`
+`Ma fenetre* - 1134 x 644`
 
 L'utilisation de `AddEventCallback<NkWindowResizeEvent>` permet donc de faire la mise à jour au bon moment, c'est-à-dire lorsqu'un événement de redimensionnement est détecté, et non à chaque image.
 
@@ -54,3 +52,5 @@ L'utilisation de `AddEventCallback<NkWindowResizeEvent>` permet donc de faire la
 <video controls width="700">
   <source src="exo5-print3.mp4" type="video/mp4">
 </video>
+
+Dans cette vdeo, on remarque a partir de la 15 ieme seconde lorsqu'on commence  a redimensionner la fenetre, le titre presente bien le caractere de la modification ainsi que la taille actuelle de la fenetre, 

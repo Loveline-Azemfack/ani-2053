@@ -59,7 +59,7 @@ Qui me permettra d'abord de verifier et enfin de gerer l'affichage exacte des va
 Fenetre : 1280 X 720 | Surface : 1280 X 720 | Facteur d'echelle (DPI) : 1
 ```
 On remarque alors que sur l'echelle j'obtiens **1** je vais donc changer le reglage d'echelle.  
-j'etais d'abord a 100% maintenat je suis passee a 125% et quan je recompile et je lance l'executable, jobtiens ceci:
+j'etais d'abord a 100% maintenat je suis passee a 125% et quand je recompile et je lance l'executable, jobtiens ceci:
 ```
 [2026-09-25 09:31:28.208] [INF] [default] [main.cpp:44 in nkmain] -> Window X : 1278
 [2026-09-25 09:31:28.208] [INF] [default] [main.cpp:45 in nkmain] -> Window Y : 712
