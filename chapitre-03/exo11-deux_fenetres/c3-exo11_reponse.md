@@ -1,4 +1,4 @@
-# EXERCICE12:
+# EXERCICE11:
 Pour realiser cet exercie, il a fallu que je me remette en questio sur comment afficher deux fenetre, et puis je me suis dis, si j'ai pu afficher, il suffit de doubler les variables pour afficher les deux fenetres, du coup j'ai donc duliquer mais variables, mais attention,ce ne sont pas toutes les variables quon duplique par exemple celle de **NkEventSystem** qui est celle `NkEventSystem &events = NkEvents();` car c'est une seule variable qui va devoir gerer l'ensemble des evenements ni la variable **running** qui est celle ci `bool running = true;`  par contre, tout ce qui concerne les variables window il faut les dupliquer car elles sont propre aux fenetre. Vous pouvez le remarquer a travers le code present dans le main.cpp de ce dossier.  
 
 ## Ouverture de la fenetre
