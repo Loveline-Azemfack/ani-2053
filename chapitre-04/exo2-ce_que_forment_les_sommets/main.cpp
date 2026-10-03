@@ -70,9 +70,6 @@ int main()
             std::cout << type << " " << s << " " << nombres << " " << unite << " " << restants << "\n";
         }
     }
-    std::cout <<"\n==========================================\n"<<std::endl;
-    std::cout<< "BILAN DE CALCUL" << std::endl;
-    std::cout <<"\n==========================================\n"<<std::endl;
     std::cout << "POINTS " << TotalTypePoints<< "\n";
     std::cout << "SEGMENTS " <<  TotalTypeSegments << "\n";
     std::cout << "TRIANGLES " << TotalTypeTriangles<< "\n";
