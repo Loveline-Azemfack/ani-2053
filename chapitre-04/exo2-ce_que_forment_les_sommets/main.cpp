@@ -1,12 +1,8 @@
-#include "NKWindow/NKMain.h"
-#include "NKWindow/NKWindow.h"
-#include "NKCanvas/App/NkCanvasApp.h"
+
 #include <iostream>
 
-using namespace nkentseu;
-using namespace nkentseu::renderer;
 
-int nkmain(const NkEntryState& state)
+int main()
 {
     int N;
     int TotalTypePoints = 0;
