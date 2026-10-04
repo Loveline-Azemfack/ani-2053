@@ -1,45 +1,54 @@
-
 #include <iostream>
 #include <cmath>
 
-int main(){
-    int N;
+using namespace std;
+
+int main()
+{
     const double pi = 3.141592653589793;
-    std::cin >> N;
-    int TotalRefus = 0;
-    int TotalVisibles = 0;
 
+    int N;
+    cin >> N;
 
-    for (int i = 0; i < N; i++){
+    int visibles = 0;
+    int refuses = 0;
+
+    for (int i = 0; i < N; i++)
+    {
         int r, n;
-        std::cin >> r >> n;
-        if (n < 3){
-            std::cout << r <<" "<<n << " REFUSE\n" << std::endl;
-            TotalRefus++;
+        cin >> r >> n;
+
+        if (n < 3)
+        {
+            cout << r << " " << n << " REFUSE\n";
+            refuses++;
             continue;
         }
-        double g = 0;
-        g = r * (1 - cos(pi / n));
 
-        int ecart = static_cast<int>(floor(g * 1000.0)); //floor c'est pour l'arrondi vers le bas
-        int zoom = 0;
-        if (g == 0){
-            std::cout<<r << " " << n << " "<< ecart << " JAMAIS"<<std::endl;
-        }else {
-            zoom = static_cast<int>(ceil(100/g));
-            ecart = ecart*(zoom/100);
+        double g = static_cast<double>(r) * (1.0 - cos(pi / static_cast<double>(n)));
+
+        if (g == 0.0)
+        {
+            cout << r << " " << n << " 0 JAMAIS\n";
+            continue;
         }
 
-        if(zoom <= 100){
-            std::cout << r << " " << n << " " << ecart << " " << zoom << " VISIBLE\n";
-            TotalVisibles++;
-        }else{
-            std::cout << r << " " << n << " " << ecart << " " << zoom << " INVISIBLE\n";
+        int ecart = static_cast<int>(floor(g * 1000.0));
+        int zoom = static_cast<int>(ceil(100.0 / g));
+
+        if (zoom <= 100)
+        {
+            cout << r << " " << n << " " << ecart << " " << zoom << " VISIBLE\n";
+            visibles++;
+        }
+        else
+        {
+            cout << r << " " << n << " " << ecart << " " << zoom << " INVISIBLE\n";
         }
     }
 
-    std::cout << "VISIBLES " << TotalVisibles << "\n";
-    std::cout << "REFUSES " << TotalRefus << "\n";
+    cout << "VISIBLES " << visibles << "\n";
+    cout << "REFUSES " << refuses << "\n";
 
     return 0;
 }
