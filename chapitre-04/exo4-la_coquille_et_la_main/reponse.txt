@@ -1,0 +1,8 @@
+Ce que la coquille me donne :
+La coquille me donne une structure prête à utiliser. Elle gère pour moi une partie de la création de la fenêtre, de la boucle principale et de l'appel des fonctions OnUpdate et OnRender. Je peux donc me concentrer principalement sur le déplacement et le dessin du carré. Elle prganise mon programme, et gere les differentes positions utilisees pour ma boucle et mon fonctionnement de mon programme
+
+Ce qu'elle me prend :
+En échange, la coquille me retire une partie du contrôle direct sur le fonctionnement du programme. Par exemple, elle décide pour moi de la manière dont la boucle principale est organisée et du moment où OnUpdate et OnRender sont appelées. A la base il ya deja une organisation predefini de l'ensemble du programme, comme son nom, l'indique, 'la coquille' elle gere les bases de m boucle ou de mon programme de mniere generale
+
+Quand je choisirais la main :
+Je choisirais la programmation à la main si j'avais besoin de contrôler précisément la boucle principale, l'ordre des opérations, la gestion des événements ou le fonctionnement du temps. La programmation à la main demande plus de code, mais elle me donne davantage de contrôle. donc je la choisirai s je veux effectuer un controle totl sur chaque ligne de mon code ou encore de maniere generale le control de ma boucle.
