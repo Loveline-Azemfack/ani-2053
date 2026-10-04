@@ -18,10 +18,11 @@ int main(){
             TotalRefus++;
             continue;
         }
-        double g = r * (1 - cos(pi / n));
+        double g = 0;
+        g = r * (1 - cos(pi / n));
 
         int ecart = static_cast<int>(floor(g * 1000.0)); //floor c'est pour l'arrondi vers le bas
-        int zoom;
+        int zoom = 0;
         if (g == 0){
             std::cout<<r << " " << n << " "<< ecart << " JAMAIS"<<std::endl;
         }else {
