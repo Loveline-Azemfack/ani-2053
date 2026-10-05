@@ -191,7 +191,7 @@ int main()
     // DEFORMATION
     if (RW != 0 && RH != 0 && W * RH != H * RW)
     {
-        std::cout << "DEFORMATION OUI "<<std::endl;
+        std::cout << "DEFORMATION OUI"<<std::endl;
     }
     else
     {
