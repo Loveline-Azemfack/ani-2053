@@ -1,0 +1,8 @@
+Ce que fait la barre sans ResetView :
+Sans ResetView, la barre d'interface défile avec le monde. Elle ne reste donc pas fixe à l'écran et sa position change lorsque le centre de la vue se déplace. ce qui fait en sorte qu'on voit tout l'ensemble defiler jusqu'a ce que ca ne soit plus visible dans la fenetre
+
+Pourquoi :
+Une vue est un état du renderer qui s'applique à tous les éléments dessinés après son activation. Comme la barre est dessinée après SetView(), elle utilise elle aussi la vue du monde lorsque ResetView() n'est pas appelé.
+
+Ou placer l'appel :
+Il faut placer ResetView() après avoir dessiné tous les éléments du monde et juste avant de dessiner les éléments de l'interface. Ainsi, le monde utilise la vue qui défile tandis que la barre utilise la vue normale de l'écran. et ainsi on verra comme dans une vie reelle un defilement sans perte de vue de l'ensemble.
