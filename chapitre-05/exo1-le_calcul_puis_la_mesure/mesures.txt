@@ -1,5 +1,5 @@
-image : photo.jpg, calcul : 38937600, mesure : 37200000, fichier : 4171622
-image : photo2.jpg, calcul : 38937600, mesure : 21100000, fichier : 2631088
-image : icone.jpg, calcul : 1440000, mesure : 16000000, fichier : 28692
-image : dessin_aplat.png, calcul : 1001700, mesure : 1500000, fichier : 93391
-image : Capture-écran.png, calcul : 2002736, mesure : 900000, fichier : 6170
+image : photo.jpg, calcul : 38937600, mesure : 38902170, fichier : 4171622
+image : photo2.jpg, calcul : 38937600, mesure : 39007027, fichier : 2631088
+image : icone.jpg, calcul : 1440000, mesure : 1468006, fichier : 28692
+image : dessin_aplat.png, calcul : 1001700, mesure : 943718, fichier : 93391
+image : Capture-écran.png, calcul : 2002736, mesure : 2097152, fichier : 6170

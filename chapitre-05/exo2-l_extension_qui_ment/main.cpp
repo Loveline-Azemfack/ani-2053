@@ -148,13 +148,13 @@ int main()
 
         // Règle 11 : TGA
         if (format == "" && taille >= 18 && nombreOctets >= 3 &&
-            (bytes[2] == 0x00 ||
-             bytes[2] == 0x01 ||
-             bytes[2] == 0x02 ||
-             bytes[2] == 0x03 ||
-             bytes[2] == 0x09 ||
-             bytes[2] == 0x0A ||
-             bytes[2] == 0x0B))
+        (bytes[2] == 0x00 ||
+            bytes[2] == 0x01 ||
+            bytes[2] == 0x02 ||
+            bytes[2] == 0x03 ||
+            bytes[2] == 0x09 ||
+            bytes[2] == 0x0A ||
+            bytes[2] == 0x0B))
         {
             format = "TGA";
         }
@@ -175,7 +175,7 @@ int main()
 
             // Ignorer espaces, tabulation, retour à la ligne
             while (position < nombreOctets &&
-                   (bytes[position] == 0x20 ||
+                    (bytes[position] == 0x20 ||
                     bytes[position] == 0x09 ||
                     bytes[position] == 0x0A ||
                     bytes[position] == 0x0D))
@@ -196,10 +196,10 @@ int main()
 
             // <svg
             else if (position + 4 <= nombreOctets &&
-                     bytes[position] == 0x3C &&
-                     bytes[position + 1] == 0x73 &&
-                     bytes[position + 2] == 0x76 &&
-                     bytes[position + 3] == 0x67)
+                    bytes[position] == 0x3C &&
+                    bytes[position + 1] == 0x73 &&
+                    bytes[position + 2] == 0x76 &&
+                    bytes[position + 3] == 0x67)
             {
                 format = "SVG";
             }
