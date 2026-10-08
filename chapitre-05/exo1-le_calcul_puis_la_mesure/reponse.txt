@@ -1,0 +1,8 @@
+Ce que la taille du fichier ne dit pas :
+La taille du fichier sur le disque ne permet pas de connaître directement la mémoire utilisée par l'image une fois qu'elle est chargée. Par exemple, photo.jpg occupe 4 171 622 octets sur le disque, alors que le calcul de sa mémoire pour les pixels donne 38 937 600 octets. La compression du fichier permet donc d'avoir une taille beaucoup plus petite sur le disque que la mémoire nécessaire une fois l'image décodée.
+
+L'ecart entre calcul et mesure :
+Le calcul est obtenu avec la formule Width() × Height() × BytesPP(). La mesure est faite en utilisant un thread et en visionnant le nombre d'octets ajouter a celui du programme initial dans le gestionnaire de tache. La mesure du processus est différente car elle dépend aussi des allocations du programme et du système. Dans mes mesures, photo.jpg a augmenté la mémoire du processus d'environ 37,2 Mo alors que le calcul des pixels donne 38 937 600 octets. Les autres images présentent également des écarts entre le calcul et la mesure. La mémoire est gérée par le système par allocations, ce qui explique que la mesure ne tombe pas exactement sur le calcul. donc la mesure et le calcul ne peuvent etre la meme chose
+
+Avant d'ouvrir cinquante photos :
+Il faut tenir compte de la mémoire occupée par les images une fois qu'elles sont décodées et chargées, et pas seulement de leur taille sur le disque. Ouvrir cinquante photos peut donc demander beaucoup plus de mémoire que ne le laissent penser leurs tailles de fichiers. Il est préférable de ne garder en mémoire que les images nécessaires afin de limiter l'utilisation de la mémoire.
