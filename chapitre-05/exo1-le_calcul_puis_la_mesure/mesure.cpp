@@ -54,10 +54,11 @@ int nkmain(const NkEntryState &state){
         int hauteur = img.Height();
         int bytesPP = img.BytesPP();
         uint8 * pixel = img.Pixels();
-        std::cout<< "image chargee avec succes !"<< std::endl;
-        std::cout<< "largeur photo: "<< largeur << std::endl;
-        std::cout<< "hauteur photo: "<< hauteur << std::endl;
-        std::cout<<"Calcul de largeur*hauteur*bytesPP de la premiere photo : "<< largeur*hauteur*bytesPP << std::endl;
+        std::cout<< "photo chargee avec succes !"<< std::endl;
+        logger.Info("largeur photo: {}", largeur);
+        logger.Info("hauteur photo: {}", hauteur);
+        logger.Info("BytesPP photo: {}", bytesPP);
+        logger.Info("Calcul memoire photo: {}", largeur * hauteur * bytesPP);
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
@@ -69,10 +70,11 @@ int nkmain(const NkEntryState &state){
         int hauteur1 = img1.Height();
         int bytesPP1 = img1.BytesPP();
         uint8 * pixel1 = img1.Pixels();
-        std::cout<< "image1 chargee avec succes !"<< std::endl;
-        std::cout<< "largeur photo2: "<< largeur1 << std::endl;
-        std::cout<< "hauteur photo2: "<< hauteur1 << std::endl;
-        std::cout<<"Calcul de largeur*hauteur*bytesPP de la deuxieme photo : "<< largeur1*hauteur1*bytesPP1 << std::endl;
+        std::cout<< "photo2 chargee avec succes !"<< std::endl;        
+        logger.Info("largeur photo2: {}", largeur1);
+        logger.Info("hauteur photo2: {}", hauteur1);
+        logger.Info("BytesPP photo2: {}", bytesPP1);
+        logger.Info("Calcul memoire photo2: {}", largeur1 * hauteur1 * bytesPP1);
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
@@ -86,9 +88,10 @@ int nkmain(const NkEntryState &state){
         int bytesPP2 = icone.BytesPP();
         uint8 * pixel2 = icone.Pixels();
         std::cout<< "icone chargee avec succes !"<< std::endl;
-        std::cout<< "largeur icone: "<< largeur2 << std::endl;
-        std::cout<< "hauteur icone: "<< hauteur2 << std::endl;
-        std::cout<<"Calcul de largeur*hauteur*bytesPP de l'icone : "<< largeur2*hauteur2*bytesPP2 << std::endl;
+        logger.Info("largeur icone: {}", largeur2);
+        logger.Info("hauteur icone: {}", hauteur2);
+        logger.Info("BytesPP icone: {}", bytesPP2);
+        logger.Info("Calcul memoire icone: {}", largeur2 * hauteur2 * bytesPP2);
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
@@ -101,9 +104,10 @@ int nkmain(const NkEntryState &state){
         int bytesPP3 = dessin.BytesPP();
         uint8 * pixel3 = dessin.Pixels();
         std::cout<< "dessin chargee avec succes !"<< std::endl;
-        std::cout<< "largeur dessin: "<< largeur3 << std::endl;
-        std::cout<< "hauteur dessin: "<< hauteur3 << std::endl;
-        std::cout<<"Calcul de largeur*hauteur*bytesPP du dessin : "<< largeur3*hauteur3*bytesPP3 << std::endl;
+        logger.Info("largeur dessin: {}", largeur3);
+        logger.Info("hauteur dessin: {}", hauteur3);
+        logger.Info("BytesPP dessin: {}", bytesPP3);
+        logger.Info("Calcul memoire dessin: {}", largeur3 * hauteur3 * bytesPP3);
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(10));
@@ -116,9 +120,10 @@ int nkmain(const NkEntryState &state){
         int bytesPP4 = capture.BytesPP();
         uint8 * pixel4 = capture.Pixels();
         std::cout<< "capture chargee avec succes !"<< std::endl;
-        std::cout<< "largeur capture: "<< largeur4 << std::endl;
-        std::cout<< "hauteur capture: "<< hauteur4 << std::endl;
-        std::cout<<"Calcul de largeur*hauteur*bytesPP de la capture : "<< largeur4*hauteur4*bytesPP4 << std::endl;
+        logger.Info("largeur capture: {}", largeur4);
+        logger.Info("hauteur capture: {}", hauteur4);
+        logger.Info("BytesPP capture: {}", bytesPP4);
+        logger.Info("Calcul memoire capture: {}", largeur4 * hauteur4 * bytesPP4);
     }
 
     events.AddEventCallback<NkWindowCloseEvent>(
