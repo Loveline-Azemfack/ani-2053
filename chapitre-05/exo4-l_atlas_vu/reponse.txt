@@ -1,0 +1,5 @@
+Pourquoi une seule texture : Une seule texture permet de mettre toutes les lettres dans une seule image. C'est plus simple pour afficher le texte.
+
+Ce que change la taille : Quand la taille de la police augmente, les lettres deviennent plus grandes et prennent plus de place. Le nombre de glyphes reste normalement le même.
+
+A quoi sert la marge entre glyphes : La marge permet de laisser un petit espace entre les lettres pour éviter qu'elles se mélangent quand on affiche le texte.
