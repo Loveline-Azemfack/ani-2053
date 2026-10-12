@@ -1,0 +1,8 @@
+Ce que le refus m'apprend :
+Le refus me montre que le lecteur n'arrive pas a ouvrir le fichier. Mais ca ne veut pas forcement dire que le fichier ne contient rien ou qu'il est totalement inutilisable.
+
+Ce qu'il ne m'apprend pas :
+Le refus ne me dit pas exactement pourquoi le fichier n'a pas ete ouvert. Il peut y avoir plusieurs raisons, par exemple un fichier coupe ou un format que le lecteur ne reconnait pas.
+
+Comment j'ai trouve la cause :
+J'ai utilise NkMediaProbe::ProbeFile pour examiner les fichiers et comparer ses resultats avec ceux du lecteur. J'ai aussi compte les images lues pour voir si la video coupee pouvait encore etre lue. Cela m'a aide a comprendre la difference entre les trois fichiers.
