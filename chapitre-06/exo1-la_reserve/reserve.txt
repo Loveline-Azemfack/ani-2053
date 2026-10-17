@@ -1,0 +1,20 @@
+Tâche :
+200 tâches courtes, chacune calculant la somme des nombres de 0 à 1000.
+
+Réserve :
+0.2116 ms ; 0.1727 ms ; 0.2752 ms
+
+Fils :
+35.1606 ms ; 35.2277 ms ; 34.2531 ms
+
+Ouvriers :
+4
+
+Tâche longue :
+200 tâches, chacune répétant 100 fois le calcul de la somme des nombres de 0 à 1000.
+
+Réserve : 7.482 ms ; 6.5326 ms ; 6.651 ms
+Fils : 52.538 ms ; 35.2911 ms ; 37.7369 ms
+
+Pourquoi :
+La réserve de fils est plus rapide parce qu'elle réutilise quatre ouvriers pour exécuter les 200 tâches. À l'inverse, la méthode avec les fils individuels doit créer 200 fils et attendre leur fin, ce qui entraîne un coût supplémentaire de création et de gestion. Pour les tâches courtes, ce coût représente une grande partie du temps total. Lorsque les tâches deviennent 100 fois plus longues, le calcul prend une place plus importante dans le temps total, mais le coût de création des fils individuels reste présent. Les mesures varient aussi selon la charge du système.
