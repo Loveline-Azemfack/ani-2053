@@ -1,0 +1,7 @@
+Constat : Dans la version initiale, le programme se fige après que le fil A a obtenu m1 et le fil B a obtenu m2. Le fil A attend ensuite m2, tandis que le fil B attend m1. Aucun des deux fils ne peut continuer, et le programme ne termine pas.
+
+Pause : Dans le débogueur, le fil A attend à la ligne [numéro de ligne de la prise de m2] dans le fichier main.cpp, car le fil B détient m2. Le fil B attend à la ligne [numéro de ligne de la prise de m1] dans le fichier main.cpp, car le fil A détient m1.
+
+Correction : J'ai modifié l'ordre de prise des verrous dans le fil B. Les deux fils prennent maintenant m1 puis m2. Les deux verrous et les attentes de 100 millisecondes sont conservés. Cette règle d'ordre supprime le cycle d'attente responsable du blocage.
+
+Règle : Dans tout le programme, les fils doivent prendre les verrous partagés dans un ordre global identique et cohérent. Il faut définir cet ordre et le respecter partout afin d'éviter les cycles d'attente et les interblocages.
