@@ -1,0 +1,29 @@
+Dix totaux :
+1768133
+1911298
+1786478
+1360108
+1409246
+1646847
+1824380
+1585035
+1473278
+1478694
+
+Un seul fil :
+1000000
+
+Release :
+8000000
+8000000
+8000000
+
+Pourquoi :
+Dans cette expérience, j'ai créé huit fils qui incrémentent tous le même compteur un million de fois. Le total attendu est donc de 8 000 000. Cependant, lors de mes dix exécutions en mode Debug, j'ai obtenu des résultats différents, tous inférieurs au total attendu.
+Cela s'explique par le fait que l'instruction compteur += 1 n'est pas une opération indivisible. Elle se déroule en trois étapes : le fil lit la valeur du compteur, ajoute 1, puis écrit la nouvelle valeur. Comme les huit fils accèdent simultanément au même compteur sans mécanisme de protection ou encore un mutex pour organiser la gestion , plusieurs fils peuvent lire la même valeur avant de la modifier. Ils peuvent alors écrire le même résultat, ce qui entraîne la perte de certaines incrémentations.
+
+Cette situation est appelée une data race d'apres les recherches. En C++, elle provoque un comportement indéfini : le programme ne garantit donc pas un résultat précis.
+
+Lorsque j'ai exécuté le programme avec un seul fil, j'ai obtenu 1 000 000, ce qui correspond au résultat attendu. En effet, un seul fil modifie le compteur, donc aucune autre incrémentation concurrente ne vient perturber le résultat.
+
+Enfin, en mode Release, j'ai obtenu 8 000 000 lors de mes trois exécutions. Ce résultat correspond au total attendu, mais il ne signifie pas que le programme est correct. Les optimisations du compilateur et les conditions d'exécution peuvent influencer les résultats observés. Comme la data race est toujours présente, le résultat peut changer et n'est pas garanti.
