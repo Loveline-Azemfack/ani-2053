@@ -1,0 +1,11 @@
+Sans protection : total obtenu = 8000000 ; temps médian = 4.2309 ms.
+
+Mutex : total obtenu = 8000000 ; temps médian = 184.676 ms.
+
+Atomique : total obtenu = 8000000 ; temps médian = 131.56 ms.
+
+Local : total obtenu = 8000000 ; temps médian = 1.6024 ms.
+
+La moins chère : la version locale, avec un temps médian de 1.6024 ms.
+
+Pourquoi : La version sans protection est rapide dans ces mesures, mais elle présente une data race, car plusieurs fils modifient simultanément le même compteur sans synchronisation. Son résultat n'est donc pas garanti. La version avec mutex est plus lente, car les fils doivent obtenir le verrou pour chaque incrément et peuvent attendre leur tour. La version atomique est plus rapide que celle avec mutex dans nos mesures, car FetchAdd(1) réalise une opération atomique sans utiliser explicitement un mutex. La version locale est la plus rapide parmi les quatre versions mesurées, car chaque fil incrémente son propre compteur local, sans verrou ni opération atomique à chaque incrément. Les huit résultats sont additionnés après la fin des fils.
