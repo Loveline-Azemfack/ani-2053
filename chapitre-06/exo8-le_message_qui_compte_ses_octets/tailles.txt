@@ -1,0 +1,17 @@
+Types complets :
+18 octets (144 bits)
+
+Quantifié :
+8 octets (60 bits)
+
+Écart maximal :
+
+* Vivant : 0
+* Numéro : 0
+* Position X : 0,004021 m
+* Position Y : 0,001999 m
+* Angle : 0,099998°
+* Santé : 0
+
+Ce que le joueur verrait :
+Le paquet quantifié est beaucoup plus petit : il passe de 18 à 8 octets, soit une réduction d'environ 55,6 %. Les écarts sur les positions sont très faibles et celui de l'angle est d'environ 0,1 degré. Le numéro, l'état vivant et la santé sont reconstruits exactement. Ces différences seraient imperceptibles ou négligeables dans le jeu. La quantification permet donc d'économiser de la bande passante tout en conservant une précision suffisante pour cet état de joueur.
