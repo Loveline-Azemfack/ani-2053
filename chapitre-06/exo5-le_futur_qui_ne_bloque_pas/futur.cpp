@@ -99,56 +99,31 @@ int nkmain(const NkEntryState &state)
     // true  : tester IsReady()
     constexpr bool UTILISER_ISREADY = true;
 
-    
-   while (running && window.IsOpen())
-   {
-       // Demarrer la mesure de cette trame
-       chronoTrame.Reset();
-       events.PollEvents();
+  while (running && window.IsOpen())
+  {
+      // Demarrer la mesure de cette trame
+      (void)chronoTrame.Reset();
 
-       // Compter les trames traitees
-       ++nombre_de_Trames;
+      // Traiter les evenements de la fenetre
+      events.PollEvents();
 
-       // Faire avancer le carre d'un pixel par trame
-       ++carre_avance;
+      // Compter les trames traitees
+      ++nombre_de_Trames;
 
-       // Recuperer le moteur de rendu 2D
-       auto& renderer = renderwindow.GetRenderer2D();
+      // Faire avancer le carre d'un pixel par trame
+      ++carre_avance;
 
-       // Effacer l'image precedente
-       renderwindow.Clear(NkColor2D{18, 18, 24, 255});
+      // Recommencer lorsque le carre atteint le bord droit
+      if (carre_avance >= 1280)
+      {
+          carre_avance = 0;
+      }
 
-       // Dessiner la bande en haut de la fenetre
-       renderer.DrawFilledRect(
-           {0.0f, 0.0f, 800.0f, 70.0f},
-           NkColor2D{40, 40, 50, 255}
-       );
+      // Lancer le chargement une seule fois, apres 60 trames
+      if (nombre_de_Trames >= 60 && !chargementLance)
+      {
+          chargementLance = true;
 
-       // Recommencer lorsque le carre atteint le bord droit
-       if (carre_avance >= 1280)
-       {
-           carre_avance = 0;
-       }
-
-       // Dessiner le carre rouge
-       renderer.DrawFilledRect(
-           {
-               static_cast<float32>(carre_avance),
-               100.0f,
-               50.0f,
-               50.0f
-           },
-           NkColor2D{255, 0, 0, 255}
-       );
-
-       // Afficher l'image dessinee
-       renderwindow.Display();
-       
-       
-       // Lancer le chargement une seule fois, apres 60 trames
-       if (nombre_de_Trames >= 60 && !chargementLance)
-       {
-           chargementLance = true;
           pool.Enqueue([&]()
           {
               NkImage img;
@@ -170,24 +145,23 @@ int nkmain(const NkEntryState &state)
                   logger.Info("Chargement de photo.jpg reussi");
               }
 
-              // Toujours transmettre une valeur pour liberer Get()
+              // Transmettre l'image au futur
               promesse.SetValue(nkentseu::traits::NkMove(img));
           });
 
+          logger.Info("Chargement de photo.jpg lance en arriere-plan");
 
-           logger.Info("Chargement de photo.jpg lance en arriere-plan");
+          // Methode 1 : attendre le resultat avec Get()
+          if (!UTILISER_ISREADY)
+          {
+              imageChargee = &futur.Get();
+              imageRecuperee = true;
 
-           if (!UTILISER_ISREADY)
-           {
-               // Methode 1 : attendre le resultat
-               imageChargee = &futur.Get();
-               imageRecuperee = true;
+              logger.Info("Image recuperee avec Get()");
+          }
+      }
 
-               logger.Info("Image recuperee avec Get()");
-           }
-       }
-       
-      // Methode 2 : verifier la disponibilite sans attendre
+      // Methode 2 : verifier la disponibilite avec IsReady()
       if (chargementLance && UTILISER_ISREADY && !imageRecuperee)
       {
           if (futur.IsReady())
@@ -199,12 +173,38 @@ int nkmain(const NkEntryState &state)
           }
           else
           {
-              // Le chargement continue : une trame a ete affichee
+              // Cette trame sera affichee pendant le chargement
               ++tramesPendantChargement;
           }
       }
-      
-      // Mesurer la duree totale de cette trame
+
+      // Recuperer le moteur de rendu 2D
+      auto& renderer = renderwindow.GetRenderer2D();
+
+      // Effacer l'image precedente
+      renderwindow.Clear(NkColor2D{18, 18, 24, 255});
+
+      // Dessiner la bande en haut de la fenetre
+      renderer.DrawFilledRect(
+          {0.0f, 0.0f, 800.0f, 70.0f},
+          NkColor2D{40, 40, 50, 255}
+      );
+
+      // Dessiner le carre rouge
+      renderer.DrawFilledRect(
+          {
+              static_cast<float32>(carre_avance),
+              100.0f,
+              50.0f,
+              50.0f
+          },
+          NkColor2D{255, 0, 0, 255}
+      );
+
+      // Afficher l'image dessinee
+      renderwindow.Display();
+
+      // Mesurer la duree totale de cette trame, rendu compris
       double dureeTrameMs = chronoTrame.Elapsed().ToMilliseconds();
 
       // Conserver la duree maximale observee
@@ -212,10 +212,14 @@ int nkmain(const NkEntryState &state)
       {
           dureeTrameMaxMs = dureeTrameMs;
       }
-    
+  }
 
-   }
-
+    // Attendre la fin du chargement si la fenetre est fermee trop tot
+    if (chargementLance && !imageRecuperee)
+    {
+        imageChargee = &futur.Get();
+        imageRecuperee = true;
+    }
     
    window.Close();
 
