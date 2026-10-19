@@ -1,0 +1,11 @@
+Liste :
+Aucune liste de serveurs découverts n'apparaît dans les résultats fournis. Le test exécuté utilise un client qui se connecte directement à 127.0.0.1. Le serveur accepte la connexion et reçoit le message « Bonjour serveur ! ».
+
+Apparitions :
+Les résultats fournis ne permettent pas de compter les apparitions de serveurs dans une liste de découverte. Le client affiche l'adresse 127.127.127.127:127 dans ses diagnostics, mais cette adresse est manifestement mal représentée par le programme puisque l'adresse demandée est 127.0.0.1 et le port résolu est 7777. Il ne faut donc pas considérer cette adresse affichée comme une adresse de serveur découverte.
+
+Pourquoi :
+L'énoncé demande d'examiner les fonctions NkDiscovery::Broadcast et NkDiscovery::Listen dans NkLobby.cpp. Broadcast diffuse les informations du serveur sur le réseau local, tandis que Listen écoute pendant la durée indiquée et rassemble les serveurs détectés. Le nombre d'apparitions dépend des annonces reçues et de la façon dont l'implémentation traite les annonces répétées. Les résultats fournis ne permettent pas de déterminer ce nombre, car ils proviennent d'un test de connexion classique et non d'un test de découverte. Le contenu de NkLobby.cpp doit être consulté pour préciser le comportement exact et les lignes de code concernées.
+
+Machines :
+Le test a été réalisé sur une seule machine, en lançant d'abord le programme en mode serveur, puis en mode client avec l'adresse 127.0.0.1. La connexion a réussi : le client a envoyé « Bonjour serveur ! » et le serveur a confirmé la réception. Ce test valide l'échange client-serveur local, mais ne valide pas encore la découverte automatique des serveurs sur le réseau local.
