@@ -1,0 +1,7 @@
+Serveur : Le serveur démarre et se met en attente de connexions sur le port 7777. Lorsqu'un client se connecte, le serveur établit la connexion et attend la réception d'un message. Dans notre test, il reçoit le message « Bonjour serveur ! ».
+
+Client : Le client se connecte au serveur en utilisant l'adresse locale 127.0.0.1 et le port 7777. Une fois la connexion établie, il envoie le message « Bonjour serveur ! ». Le programme confirme l'envoi du message.
+
+Pair : Le pair représente l'autre participant à la communication. Le client et le serveur peuvent ainsi établir une connexion et échanger des messages. Dans notre test, le serveur reconnaît la connexion du client et reçoit le message transmis.
+
+Machines : Pour cette expérience, les deux programmes ont été exécutés sur un seul ordinateur. Le client et le serveur communiquent par l'intermédiaire de l'adresse de bouclage 127.0.0.1, sur le port 7777. Ce test valide l'échange local, mais ne constitue pas encore un essai entre deux ordinateurs physiques distincts.
