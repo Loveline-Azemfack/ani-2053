@@ -1,0 +1,6 @@
+Moyenne : 334.684785 ms
+Minimum : 277.069100 ms
+Maximum : 541.675300 ms
+Lissée : 303.431831 ms
+Moteur : 49.180202 ms
+Écart : 254.251628 ms. L'écart vient de la différence entre les mesures applicatives aller-retour et l'estimation du moteur, mise à jour dans NkConnectionManager::NetThreadLoop, dans NkConnection.cpp. Les deux valeurs peuvent différer à cause de leur méthode de mesure et de lissage.
