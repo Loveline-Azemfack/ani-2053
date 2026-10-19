@@ -1,0 +1,7 @@
+Image : L'image utilisée est photo.jpg, d'une taille de 4 171 622 octets. Le temps de chargement mesuré est de 384,763 ms lors du test avec Get() et de 456,074 ms lors du test avec IsReady().
+
+Get : La durée maximale d'une trame mesurée est de 428,912 ms. Aucune trame n'a été affichée pendant l'attente du chargement, car Get() bloque le thread principal jusqu'à ce que le résultat soit disponible.
+
+IsReady : La durée maximale d'une trame mesurée est de 476,197 ms. Vingt-huit trames ont été affichées pendant le chargement. IsReady() permet donc à la boucle de continuer à afficher des trames lorsque l'image n'est pas encore disponible, sans attendre directement le résultat.
+
+Ce qu'on voit : Avec Get(), le déplacement du carré rouge s'interrompt pendant l'attente du chargement, puis reprend lorsque l'image est disponible. Avec IsReady(), le carré peut continuer à se déplacer pendant le chargement, car la boucle vérifie la disponibilité de l'image sans attendre. Cependant, la durée maximale élevée mesurée avec IsReady() doit être vérifiée avant de conclure que l'animation est plus fluide.
