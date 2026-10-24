@@ -1,0 +1,17 @@
+Les sauts :
+
+1. Dans `NKCanvas\App\NkCanvasApp.h`, j’ai trouvé la fonction `OnRender(NkRenderWindow &target)`. Cependant, dans le code que j’ai examiné, elle contient seulement `(void)target;` et n’appelle pas `target.Clear(couleur)`. Je n’ai donc pas retrouvé le point de départ exact indiqué dans l’énoncé.
+2. Dans `NKCanvas\Renderer\Targets\NkRenderWindow.h`, j’ai trouvé la déclaration de `NkRenderWindow::Clear(const NkColor2D &color)`. Le mot `override` indique que cette fonction redéfinit une fonction héritée de la classe parente.
+3. Dans `NKCanvas\Renderer\Targets\NkRenderTarget.h`, j’ai trouvé la déclaration de `NkRenderTarget::Clear(const NkColor2D &color) = 0`. Cela signifie que la fonction est virtuelle pure et que la classe dérivée doit fournir son implémentation.
+
+Arrêt :
+
+Je me suis arrêté à la déclaration de `NkRenderWindow::Clear()` dans `NKCanvas\Renderer\Targets\NkRenderWindow.h`.
+
+Pourquoi là :
+
+J’ai recherché l’implémentation de `NkRenderWindow::Clear()` et de `NkRenderTarget::Clear()` dans les fichiers du kit, mais je ne l’ai pas trouvée. J’ai seulement retrouvé leurs déclarations. Je ne peux donc pas vérifier ce que fait `NkRenderWindow::Clear()` à l’intérieur ni quelle fonction elle appelle ensuite.
+
+Ce que je sais maintenant :
+
+J’ai constaté que `NkRenderWindow` hérite de `NkRenderTarget` et que sa fonction `Clear()` redéfinit celle de la classe parente. Dans `NKCanvas\Renderer\Core\NkRenderer2D.h`, j’ai également trouvé une fonction `Clear()` qui appelle `mBackend->Clear(c)` lorsque le backend existe. Cependant, je n’ai pas vérifié que `NkRenderWindow::Clear()` appelle cette fonction. Je sais seulement que je n’ai pas trouvé son implémentation dans les fichiers que j’ai examinés.

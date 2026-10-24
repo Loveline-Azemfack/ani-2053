@@ -1,0 +1,15 @@
+Module : NKGui
+
+D'après le projet :
+NKGui dépend d'un module de gestion des événements ('NKEvent', 'NKFileSystem').
+De meme, Il depend de modules liés aux polices et aux images ('NKFont', 'NKImage').
+Il utilise des modules de base pour la mémoire, les conteneurs et les fichiers. Donc depend aussi d'eux. ('NKContainers', 'NKCore',  'NKMemory')
+Il dépend aussi de modules de journalisation et de gestion des fils d'exécution ('NKLogger','NKThreading' ). De plus , depend aussi des modules de gestion des sciens appliquees et aussi celle de la paltforme ('NKMath',, 'NKPlatform')
+
+On peut direque NKGui d'apres  ses dependances aide pour la construction d'un interface graphiwue par exempe ou on de meme il peut jouer comletement le role de ImGui.
+Après l'en-tête :
+En-tête consulté : NKGui/NKGui.h.
+NKGui est un framework d'interface utilisateur de nouvelle génération, prévu pour les modes immédiat et retenu. L'en-tête indique que le projet est en phase 1, au stade du squelette. Le cœur, les widgets, les fenêtres et le docking sont prévus pour les phases suivantes.
+
+Mes erreurs :
+Les dépendances seules ne permettaient pas de connaître le rôle exact de NKGui ni son état d'avancement. L'en-tête précise qu'il s'agit d'un framework d'interface utilisateur en cours de réécriture et que plusieurs fonctionnalités ne sont pas encore implémentées. Ce qu'on ne pourrait pas facilement determiner en observat juste les dependances.
