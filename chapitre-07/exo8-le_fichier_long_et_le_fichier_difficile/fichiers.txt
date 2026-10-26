@@ -1,0 +1,11 @@
+Le long :
+Build\Kit\NkentseuKit\include\NKContainers\Sequential\NkVector.h  compte 2486 lignes.
+
+Le difficile :
+Build\Kit\NkentseuKit\include\NKMemory\NkFunctionSIMD.h compte 287 lignes.
+
+Ce qu'ils gardent :
+NkVector.h garde l'état d'un conteneur dynamique : le pointeur vers les éléments (mData), le nombre d'éléments (mSize), la capacité réservée (mCapacity) et l'allocateur utilisé (mAllocator). Cet état peut être modifié par plusieurs opérations de la classe, notamment les constructeurs, les opérateurs d'affectation, PushBack, PopBack, Insert, Erase, Resize, Reserve et Clear. NkFunctionSIMD.h présente surtout des fonctions de traitement mémoire (copie, déplacement, remplissage, comparaison, recherche, CRC32 et hachage) ainsi que des fonctions d'alignement. Les données traitées sont fournies aux fonctions par leurs paramètres ; le fichier d'en-tête ne présente pas, dans les éléments examinés, un état de conteneur comparable à celui de NkVector. Les modifications des blocs mémoire traités dépendent des fonctions appelées et de leur implémentation.
+
+L'écart :
+NkVector.h est relativement facile à suivre parce que son état principal est identifié par quelques membres nommés et que ses opérations sont documentées et organisées par catégories. On peut relier les changements d'état aux méthodes qui les effectuent. NkFunctionSIMD.h est plus difficile à comprendre à partir du seul en-tête, car il expose plusieurs opérations de bas niveau sur la mémoire sans montrer nécessairement, dans leurs déclarations, tout le détail de leurs effets. Pour comprendre où les données sont réellement modifiées et quelles garanties chaque opération offre, il faut aussi examiner les implémentations correspondantes. Le contraste vient donc de la visibilité et de la traçabilité des données et de leurs modifications, et non du nombre de lignes.

@@ -1,0 +1,19 @@
+Les couches :
+
+1. Windows: WM_KEYDOWN : message clavier Windows traité dans `NkWin32_ProcessMessage()`, déclaré indirectement par l'API Win32. Implémentation : `Kernel/Runtime/NKWindow/src/NKWindow/Platform/Win32/NkWin32EventSystem.cpp`. Liaison avec la couche suivante : **prouvée par le code**, car le `switch (msg)` traite `WM_KEYDOWN`.
+
+2. Backend Win32 : NkWin32_ProcessMessage() : cette fonction extrait le scancode, détermine la touche et crée un NkKeyPressEvent si la touche est reconnue et qu'il ne s'agit pas d'une répétition. En-tête associé : Kernel/Runtime/NKWindow/src/NKWindow/Platform/Win32/NkWin32EventSystem.h, qui déclare NkWin32WndProc(). Liaison avec la couche suivante : prouvée par le code, grâce à la création de NkKeyPressEvent et à l'appel de EnqueueForWindow(e).
+
+3. Événement clavier : NkKeyPressEvent : classe déclarée dans Kernel/Runtime/NKEvent/src/NKEvent/NkKeyboardEvent.h. Elle représente une pression de touche. Liaison avec la couche suivante : prouvée par le code, car l'événement est transmis à sys.Enqueue_Public(evt, winId).
+
+4. File des événements : NkEventSystem::Enqueue_Public() et NkEventSystem::PollEvent() : déclarations à rechercher dans Kernel/Runtime/NKEvent/src/NKEvent/NkEventSystem.h, implémentations dans NkEventSystem.cpp. Le code montre que les événements peuvent être placés dans la file, puis récupérés par PollEvent(). Liaison avec la couche suivante : prouvée par le code, car NkCanvasApp::PumpEvents() appelle events.PollEvent().
+
+5. Application Canvas : NkCanvasApp::PumpEvents() et NkCanvasApp::DispatchTyped() : classe déclarée dans Kernel/Runtime/NKCanvas/src/NKCanvas/App/NkCanvasApp.h, implémentée dans NkCanvasApp.cpp. PumpEvents() récupère l'événement et le transmet à DispatchTyped(). Liaison avec la couche suivante : prouvée par le code, car DispatchTyped() reconnaît NkKeyPressEvent et appelle OnKeyPress(*key).
+
+6. Gestionnaire de touche de l'application : NkCanvasApp::OnKeyPress(const NkKeyPressEvent&) : méthode virtuelle déclarée dans Kernel/Runtime/NKCanvas/src/NKCanvas/App/NkCanvasApp.h. Elle permet à l'application dérivée de réagir à la pression d'une touche. La liaison est prouvée par le code, car DispatchTyped() appelle cette méthode pour un événement NkKeyPressEvent.
+
+Où je me suis arrêté :
+
+J'ai suivi le trajet dans les fichiers sources du projet, de WM_KEYDOWN jusqu'à l'appel de NkCanvasApp::OnKeyPress(). Les implémentations permettent de vérifier les principales transitions. Cependant, je n'ai pas encore vérifié toutes les déclarations et tous les détails internes de la bibliothèque distribuée dans le kit du cours. Le suivi est donc établi à partir des sources présentes dans le dépôt.
+
+Combien : 6 couches identifiées ; 6 couches suivies dans le code source.

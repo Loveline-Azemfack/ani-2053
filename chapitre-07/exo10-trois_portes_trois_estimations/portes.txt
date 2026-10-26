@@ -1,0 +1,13 @@
+Module : NKCanvas
+
+Après le projet :
+J'ai choisi le module NKCanvas. Le fichier de projet permet d'identifier les dépendances du module grâce à la ligne KIT_DEPENDS. Ma première estimation est que NKCanvas sert à créer des applications graphiques et à gérer des fenêtres.
+
+Après un programme :
+En observant un programme qui utilise NKCanvas, je peux examiner comment l'application est créée, initialisée, exécutée et arrêtée. Mon estimation est que NKCanvas permet de faire fonctionner une application graphique et de gérer les événements pendant son exécution.
+
+Après les en-têtes :
+L'en-tête NkCanvasApp.h déclare la classe NkCanvasApp ainsi que des méthodes comme PumpEvents() et OnKeyPress(). J'en déduis que NKCanvas fournit une structure d'application qui permet de gérer les événements et de réagir aux actions de l'utilisateur.
+
+L'écart :
+La première porte m'a donné une idée générale du rôle du module. La deuxième m'a permis d'imaginer comment il est utilisé dans un programme. La troisième a précisé les possibilités offertes par ses méthodes, notamment la gestion des événements et des touches du clavier. Mon estimation est ainsi devenue plus précise au fil des trois portes.
