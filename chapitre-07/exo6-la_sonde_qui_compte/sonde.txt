@@ -1,0 +1,24 @@
+Plafond 60 :
+Le plafond est réglé à 60 images par seconde. La journalisation est activée.
+Nombre de passages : 599
+Durée mesurée : 10,0014 s
+
+Sans plafond :
+Le plafond est réglé à 0. La journalisation est activée.
+Nombre de passages : 604
+Durée mesurée : 10,0045 s
+
+Sans la ligne :
+Le plafond est réglé à 60 images par seconde, puis à 0 pour la quatrième mesure. La ligne de journalisation de chaque passage est désactivée.
+
+* Avec le plafond à 60 : 598 passages en 10,0048 s.
+* Sans plafond : 604 passages en 10,0061 s.
+
+Les écarts :
+La fréquence de rafraîchissement de l’écran est de 60,01 Hz.
+
+Avec un plafond de 60 images par seconde, le nombre théorique de passages en 10 secondes est de 600. Les mesures donnent 599 passages avec journalisation et 598 sans journalisation. Les écarts par rapport à 600 sont respectivement de 1 et 2 passages.
+
+Sans plafond, les deux mesures donnent 604 passages, que la journalisation soit activée ou désactivée. Dans ces essais, la désactivation de la journalisation n’a donc pas changé le nombre de passages observé.
+
+Les mesures sont proches, mais elles ne suffisent pas à conclure que la journalisation n’a aucun effet dans toutes les situations.

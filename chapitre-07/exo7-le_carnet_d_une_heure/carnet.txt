@@ -1,0 +1,14 @@
+Question :
+Où et comment NKCanvas applique-t-il le plafond d'images par seconde configuré dans NkCanvasApp ? Recherche effectuée le 26 octobre 2026, de 16h50 à 17h30.
+
+Les endroits :
+Dans Kernel/Runtime/NKCanvas/src/NKCanvas/App/NkCanvasApp.cpp, j'ai étudié la boucle principale et la fonction CadencerTrame. La boucle met à jour l'application, efface la cible de rendu, appelle OnRender(), présente l'image avec Display(), puis régule la cadence. Dans Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Core/NkDrawable.h, j'ai trouvé l'interface des objets dessinables. Dans Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Targets/NkRenderTarget.h, j'ai observé comment la cible délègue le dessin à l'objet. Dans Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.cpp, j'ai étudié comment un sprite prépare ses sommets et ses états de rendu avant de les transmettre à la cible.
+
+Les surprises :
+J'ai découvert que OnRender() et Draw() ont des rôles différents. OnRender() est appelé dans la boucle principale de l'application, tandis que Draw() sert à dessiner un objet. J'ai également observé que CadencerTrame intervient après Display(). Lorsque la trame est terminée avant le temps prévu, le programme attend le temps restant avec Sleep(). Lorsque ce temps est dépassé, il cède la main avec YieldThread(). Si le plafond est désactivé, il cède également la main.
+
+Les questions ouvertes :
+Le plafond configuré garantit-il une cadence identique sur toutes les plateformes, notamment sur le Web ? Question encore ouverte au 26 octobre 2026.
+
+Les mensonges :
+Je n'ai pas relevé de contradiction certaine entre un commentaire et le code dans les extraits examinés.

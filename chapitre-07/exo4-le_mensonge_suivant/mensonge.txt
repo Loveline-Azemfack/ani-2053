@@ -1,0 +1,40 @@
+Le commentaire :
+
+Dans le fichier `NkFuture.h`, j'ai trouve un commentaire concernant la classe `NkPromise<T>`. Il indique que les fonctions `SetValue()` et `SetException()` ne doivent etre appelees qu'une seule fois pour une meme promesse. Selon ce commentaire, les appels multiples constituent un comportement indefini (*undefined behavior*).
+
+Voici le passage exact :
+
+// Invariant de production :
+//   - SetValue/SetException ne peut etre appele qu'une seule fois
+//   - Appels multiples = comportement indefini (a eviter par l'utilisateur)
+
+Le code :
+
+En recherchant l'implementation de ces fonctions dans le meme fichier, j'ai trouve cette verification dans `SetValue()` :
+
+if (mState->mReady) {
+    return; // Deja satisfait : ignorer pour eviter UB
+}
+
+J'ai retrouve le meme principe dans `SetException()`. Si `mState->mReady` indique que la promesse est deja satisfaite, la fonction execute `return;` et ne poursuit pas son traitement.
+
+Ce qui m'a interpelle, c'est que le commentaire annonce un comportement indefini en cas d'appels multiples, alors que le code verifie si la promesse a deja ete satisfaite et prevoit d'ignorer l'appel supplementaire.
+
+La preuve :
+
+Pour verifier mon observation, j'ai compare le commentaire de `NkPromise<T>` avec les implementations de `SetValue()` et de `SetException()` dans `NkFuture.h`.
+
+Dans le commentaire, les appels multiples sont presentes comme un comportement indefini. Dans le code, la condition `if (mState->mReady)` est suivie de `return;`, ce qui interrompt la fonction lorsque la promesse est deja satisfaite.
+
+Les deux passages a comparer sont donc :
+
+* La documentation de `NkPromise<T>`, qui indique que les appels multiples constituent un comportement indefini.
+* Le corps de `SetValue()` et de `SetException()`, qui verifie si la promesse est deja satisfaite et ignore alors l'appel supplementaire.
+
+Cette comparaison montre que l'implementation prevoit explicitement le cas d'un appel repete. Cependant, elle ne suffit pas a prouver que la documentation est fausse : celle-ci peut interdire les appels multiples meme si le code prevoit une protection dans cette situation. C'est cette difference entre la regle annoncee et le comportement prevu dans le code qui m'a amene a examiner cet exemple.
+
+Ce qu'il dit de son auteur :
+
+Apres avoir recherche et compare ces passages, je pense qu'il pourrait exister une imprecision dans la documentation. Une personne qui lit uniquement le commentaire peut penser que les appels repetes provoquent necessairement un comportement indefini, alors que le code contient une verification qui ignore les appels supplementaires lorsque la promesse est deja satisfaite.
+
+Cette difference est peut-etre liee a un oubli dans la documentation. Mon observation porte uniquement sur ce que j'ai pu constater dans le fichier : le commentaire presente les appels multiples comme un comportement indefini, tandis que l'implementation prevoit une verification pour les ignorer lorsque la promesse est deja satisfaite.

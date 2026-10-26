@@ -1,0 +1,67 @@
+Par le texte :
+
+Commande exécutée dans PowerShell pour rechercher les occurrences de `Draw` dans le fichier `main.cpp` :
+
+Select-String -Path ".\Exercices-sprint\src\main.cpp" -Pattern "Draw\s*\(" |
+    ForEach-Object {
+        "{0}:{1}: {2}" -f $_.Path, $_.LineNumber, $_.Line.Trim()
+    }
+
+Résultats :
+
+* Ligne 45 : `void Draw(` déclaration de la méthode `Draw` de `MonDessin`.
+* Ligne 75 : `target.Draw(` appel qui transmet les sommets à la cible de rendu.
+* Ligne 119 : `target.Draw(objet);` appel qui demande le dessin de l'objet.
+
+La recherche dans `Canvas/include` a également trouvé plusieurs déclarations et appels de `Draw`, notamment :
+
+* `Canvas/include/NKCanvas/Renderer/Core/NkDrawable.h:51` — déclaration virtuelle pure de `NkDrawable::Draw`.
+* `Canvas/include/NKCanvas/Renderer/Targets/NkRenderTarget.h:111` — surcharge de `Draw` qui accepte un `NkDrawable`.
+* `Canvas/include/NKCanvas/Renderer/Targets/NkRenderTarget.h:112` — appel virtuel `drawable.Draw(*this, states)`.
+* `Canvas/include/NKCanvas/Renderer/Targets/NkRenderTarget.h:121` — déclaration de la surcharge qui accepte des sommets.
+* `Canvas/include/NKCanvas/Renderer/Targets/NkRenderWindow.h:100` — redéfinition de la surcharge qui accepte des sommets.
+* `Canvas/include/NKCanvas/Renderer/Core/NkRenderer2D.h:191` et `:193` — autre surcharge de `Draw` et appel virtuel associé.
+
+Par la pile :
+
+Point d'arrêt placé avec GDB dans `MonDessin::Draw` :
+
+(gdb) break MonDessin::Draw
+(gdb) run
+(gdb) bt
+
+Pile d'appels réellement observée :
+
+MonDessin::Draw
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Exercices-sprint/src/main.cpp:54
+
+nkentseu::renderer::NkRenderTarget::Draw
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Canvas/include/NKCanvas/Renderer/Targets/NkRenderTarget.h:112
+
+MonApplication::OnRender
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Exercices-sprint/src/main.cpp:119
+
+nkentseu::renderer::NkCanvasApp::Execute
+    C:/Rihen/ateliers_kits/cours_2210/Nkentseu/Kernel/Runtime/NKCanvas/src/NKCanvas/App/NkCanvasApp.cpp:223
+
+nkentseu::renderer::NkCanvasApp::Run<MonApplication>
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Canvas/include/NKCanvas/App/NkCanvasApp.h:204
+
+nkmain
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Exercices-sprint/src/main.cpp:130
+
+WinMain
+    D:/Projets/Rihen/JENGA+NKENTSEU/Sprint6-deuxieme/Canvas/include/NKWindow/EntryPoints/NkWindowsDesktop.h:84
+
+main
+    ../crt/crtexewin.c:67
+
+Les différences :
+
+* La recherche textuelle trouve les déclarations, les définitions et les appels contenant le nom `Draw`, sans prouver qu'ils sont exécutés.
+* La pile d'appels montre le chemin réellement suivi pendant cette exécution : `main` → `WinMain` → `nkmain` → `NkCanvasApp::Run` → `NkCanvasApp::Execute` → `MonApplication::OnRender` → `NkRenderTarget::Draw` → `MonDessin::Draw`.
+* L'appel `target.Draw(objet)` de `MonApplication::OnRender`, à la ligne 119 de `main.cpp`, appelle la surcharge `NkRenderTarget::Draw` qui accepte un `NkDrawable`.
+* À la ligne 112 de `NkRenderTarget.h`, cette surcharge appelle `drawable.Draw(*this, states)`. Grâce au dispatch virtuel, l'exécution atteint la redéfinition `MonDessin::Draw`, à la ligne 54 de `main.cpp`.
+* L'appel `target.Draw(vertices, 4, NkPrimitiveType::NK_LINES, states)` de `MonDessin::Draw` transmet les sommets à la cible de rendu. Il n'apparaît pas dans la pile affichée, car le point d'arrêt interrompt l'exécution avant que cet appel soit exécuté.
+* La recherche textuelle trouve aussi d'autres surcharges de `Draw` dans les fichiers d'en-tête, dont certaines ne figurent pas dans cette pile. Elles ne font pas partie du chemin d'exécution observé.
+* La pile montre également les fonctions de démarrage et de gestion de l'application, qui ne sont pas toutes des appels directs à une méthode nommée `Draw`.
