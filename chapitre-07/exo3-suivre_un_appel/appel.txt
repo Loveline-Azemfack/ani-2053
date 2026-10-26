@@ -13,5 +13,9 @@ Pourquoi là :
 J’ai recherché l’implémentation de `NkRenderWindow::Clear()` et de `NkRenderTarget::Clear()` dans les fichiers du kit, mais je ne l’ai pas trouvée. J’ai seulement retrouvé leurs déclarations. Je ne peux donc pas vérifier ce que fait `NkRenderWindow::Clear()` à l’intérieur ni quelle fonction elle appelle ensuite.
 
 Ce que je sais maintenant :
-
-J’ai constaté que `NkRenderWindow` hérite de `NkRenderTarget` et que sa fonction `Clear()` redéfinit celle de la classe parente. Dans `NKCanvas\Renderer\Core\NkRenderer2D.h`, j’ai également trouvé une fonction `Clear()` qui appelle `mBackend->Clear(c)` lorsque le backend existe. Cependant, je n’ai pas vérifié que `NkRenderWindow::Clear()` appelle cette fonction. Je sais seulement que je n’ai pas trouvé son implémentation dans les fichiers que j’ai examinés.
+L'étude du code m'a permis de distinguer le contrat d'une classe de son implémentation concrète.
+Une méthode virtuelle pure définit une obligation pour les classes concrètes qui héritent de l'interface. Sa déclaration ne permet donc pas, à elle seule, de déterminer quelle implémentation sera exécutée.
+J'ai également trouvé une méthode Draw qui reçoit un objet NkDrawable et lui transmet l'appel au moyen de drawable.Draw(*this, states). Cette méthode constitue une étape importante du chemin d'appel, mais elle ne suffit pas à expliquer tout le parcours depuis la fenêtre jusqu'à l'implémentation concrète.
+Pour poursuivre l'analyse, il faut examiner le type réel de la fenêtre, ses classes parentes et les membres qui lui donnent accès à cette méthode. Il faut ensuite rechercher les implémentations concrètes et vérifier laquelle est appelée lors de l'exécution.
+Je dois donc distinguer trois éléments : les déclarations qui définissent les interfaces, le code qui transmet les appels et l'implémentation réellement exécutée.
+Enfin, je ne peux pas affirmer que le chemin est entièrement établi tant que je n'ai pas vérifié les relations manquantes dans le code et, lorsque cela est nécessaire, observé l'exécution dans le débogueur.
