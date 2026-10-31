@@ -1,0 +1,20 @@
+Tester la version directe :
+La version directe utilise directement l'instance globale NkInput pour vérifier si la touche Espace est enfoncée. Pour la tester, il faut disposer d'un système d'entrée initialisé et pouvoir contrôler l'état du clavier. Sans cela, le résultat dépend de l'état réel du système d'entrée et le test devient difficile à automatiser. Cela rend la fonction dépendante de son environnement.
+
+La version testable :
+La fonction a été modifiée pour recevoir deux paramètres : estAuSol et espaceEnfoncee. Elle conserve la même règle : le personnage peut sauter uniquement s'il est au sol et si la touche Espace est enfoncée. Elle ne dépend plus directement de NkInput. On peut donc lui transmettre différentes valeurs pour vérifier son comportement sans avoir besoin d'une fenêtre ou d'un clavier réel.
+
+Le banc :
+Le banc de test est une application basée sur NkCanvasApp. Les tests sont exécutés dans OnCommandLine, avant la création de la fenêtre. Quatre situations ont été vérifiées :
+
+* Au sol avec Espace enfoncée : SUCCÈS.
+* Au sol sans Espace : SUCCÈS.
+* En l'air avec Espace enfoncée : SUCCÈS.
+* En l'air sans Espace : SUCCÈS.
+
+Résultats en Debug : 4 tests réussis, 0 échec.
+Résultats en Release : 4 tests réussis, 0 échec.
+Le nombre d'échecs retourné par le banc est donc 0.
+
+Sans fenêtre :
+La version directe retourne false en Debug comme en Release. En effet, OnCommandLine est exécutée avant la création de la fenêtre et l'état réel du clavier n'est pas encore disponible. L'instance NkInput utilise alors son état de repli, qui renvoie false. Cela montre pourquoi une fonction qui dépend directement d'un système externe est plus difficile à tester.

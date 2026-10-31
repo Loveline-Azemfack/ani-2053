@@ -1,0 +1,8 @@
+L'endroit :
+Dans Canvas/include/NKImage/Core/NkImage.h, les fonctions ChannelsOf() (ligne 88) et BytesPerPixelOf() (ligne 108) utilisent chacune un switch sur le même type NkImagePixelFormat. Elles parcourent les mêmes formats : NK_GRAY8, NK_GRAY_A16, NK_RGB24, NK_RGBA32, NK_RGBA128F et NK_RGB96F. Ces fonctions sont également utilisées dans NkImage.h et NkTextureOven.h.
+
+Le motif :
+Une table de correspondance centralisée (Lookup Table) pourrait regrouper les propriétés de chaque format d'image, notamment le nombre de canaux et le nombre d'octets par pixel. Les deux fonctions pourraient consulter cette table au lieu de répéter la liste des formats dans deux `switch` différents.
+
+Le coût :
+La modification concernerait principalement NkImage.h, où les deux fonctions sont définies. Les appels existants dans NkImage.h et NkTextureOven.h pourraient être conservés. Le principal risque serait d'associer une mauvaise valeur à un format d'image, ce qui pourrait entraîner des erreurs dans le calcul de la mémoire, la lecture ou le traitement des pixels. Il faudrait donc vérifier les valeurs de tous les formats et tester les opérations de lecture et de téléversement des images.

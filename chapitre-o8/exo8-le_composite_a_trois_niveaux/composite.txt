@@ -1,0 +1,25 @@
+La hiérarchie :
+La scène est organisée sur trois niveaux :
+* Parent 1 : position (100, 80), rotation de 0°.
+* Parent 2 : position (50, 30), rotation de 90°.
+* Sprite : position locale (20, 10), rotation de 0°.
+Le Parent 1 contient le Parent 2, qui contient à son tour le Sprite. Chaque composite transmet son état de transformation à son enfant afin de composer les transformations de toute la hiérarchie.
+
+Attendu :
+Pour calculer la position mondiale de l'origine du Sprite, on applique les transformations de la hiérarchie.
+La position locale du Sprite est (20, 10). Après une rotation de 90° par le Parent 2, elle devient (-10, 20).
+On ajoute ensuite la position du Parent 2 :
+(-10 + 50, 20 + 30) = (40, 50).
+Enfin, on ajoute la position du Parent 1 :
+(40 + 100, 50 + 80) = (140, 130).
+La position mondiale attendue de l'origine du Sprite est donc (140, 130).
+
+Mesuré :
+La sonde normale utilise TransformPoint pour calculer la position mondiale de son origine à partir de la transformation composée reçue de ses parents et de sa propre transformation.
+Le résultat obtenu est (140, 130), ce qui correspond à la position théorique calculée.
+La capture d'écran réalisée avec les arguments --capture=capture.png --capture-frame=10 confirme également que le Sprite est correctement affiché à la position attendue.
+
+Le défaut :
+Pour reproduire l'ancien défaut, une deuxième sonde a été créée en ignorant l'état de transformation reçu des parents. Elle utilise uniquement sa propre transformation locale.
+Le résultat obtenu est (20, 10), au lieu de (140, 130).
+La comparaison entre les deux sondes permet de détecter le défaut : la sonde défectueuse ne prend pas en compte les transformations des composites parents. Ce test vérifie donc que la composition des transformations est correctement transmise dans toute la hiérarchie.

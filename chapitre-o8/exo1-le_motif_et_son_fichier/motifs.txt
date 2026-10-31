@@ -1,0 +1,56 @@
+Stratégie :
+Fichier : NKCanvas/Renderer/Core/NkIRenderer2D.h
+Ligne : 52
+Code : virtual bool Initialize(NkIGraphicsContext *ctx) = 0;
+Justification : Le moteur définit une interface commune de rendu que différentes implémentations peuvent utiliser (Software, OpenGL, Vulkan, DirectX). Cela permet de changer de stratégie de rendu sans modifier le code qui utilise l'interface.
+
+Fabrique :
+Fichier : NKCanvas/Renderer/Core/NkRenderer2DFactory.h
+Ligne : 36
+Code : static NkIRenderer2D *Create(NkIGraphicsContext *ctx);
+Justification : La fabrique centralise la création des objets de rendu 2D à partir d'un contexte graphique.
+
+Façade :
+Fichier : NKCanvas/App/NkCanvasApp.h
+Ligne : 202
+Code : template <typename T> static int Run(const NkEntryState &state) {
+Justification : NkCanvasApp fournit une interface simplifiée pour utiliser les services du moteur (fenêtre, cible de rendu, configuration, temps et arrêt), tout en cachant la gestion interne de l'application.
+
+Patron de méthode :
+Fichier : NKCanvas/App/NkCanvasGuiApp.h
+Ligne : 241
+Code : void OnRender(NkRenderWindow &target) final {
+Justification : La classe de base impose l'ordre des opérations de rendu : début de frame, dessin, fin de frame et soumission des listes. Elle laisse notamment à l'application la possibilité de personnaliser le dessin avec OnDraw.
+
+Observateur :
+Fichier : NKEvent/NkDropEvent.h
+Ligne : 713
+Code : eventManager.Subscribe<NkDropEnterEvent>(
+Justification : Le gestionnaire d'événements permet aux objets de s'abonner à un événement afin d'être avertis lorsqu'il se produit.
+
+Singleton :
+Fichier : NKCanvas/Renderer/Core/NkTransform.h
+Ligne : 70
+Code : static const NkTransform kId;
+Justification : Cette variable statique locale représente l'instance unique de la transformation identité, retournée par la méthode Identity().
+
+Adaptateur :
+Fichier : NKCanvas/UI/NkGuiCanvasBackend.h
+Ligne : 213
+Code : void Submit(const nkentseu::nkgui::NkGuiDrawList &dl, nkentseu::uint32 fbW, nkentseu::uint32 fbH) {
+Justification : NkGuiCanvasBackend adapte les listes de dessin de NKGui au système de rendu NKCanvas en convertissant les données et en transmettant les commandes au renderer.
+
+Composite :
+Fichier : NKCanvas/Renderer/Core/NkTransform.h
+Ligne : 94
+Code : NkTransform &Combine(const NkTransform &other) noexcept {
+Justification : Cette méthode permet de combiner plusieurs transformations. Le commentaire de la ligne 37 explique notamment la composition parent-enfant : world = parent * local.
+Remarque : La composition des transformations est bien implémentée, mais les extraits consultés ne démontrent pas à eux seuls une structure complète d'objets Composite. La relation parent-enfant est explicitée dans un commentaire.
+
+Commande :
+Motif absent sous sa forme classique dans les extraits examinés.
+Analogue le plus proche :
+Fichier : NKEvent/NkEventDispatcher.h
+Ligne : 642
+Code : struct NkActionCommand {
+Justification : NkActionCommand représente une commande d'entrée associée à un code physique. NkActionManager permet de les ajouter, de les supprimer et de déclencher les actions associées. Cependant, cet ensemble ne démontre pas complètement le patron Commande classique, dans lequel une requête est encapsulée dans un objet exécutable.

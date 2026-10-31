@@ -1,0 +1,11 @@
+Publiques :
+Le fichier NkRenderTarget.h contient 24 méthodes publiques, sans compter le destructeur. Les surcharges sont comptées séparément : les quatre méthodes Draw, les deux GetRenderer et les deux GetRenderer2D sont considérées comme des méthodes distinctes.
+
+Utiles :
+6 méthodes sont retenues pour les opérations courantes de rendu : Clear, Display, Draw(const NkDrawable&), Draw(const NkVertexArray&), Draw(const NkVertex*, uint32, NkPrimitiveType, ...) et Capture. Elles permettent respectivement d'effacer la cible, de dessiner des éléments, d'afficher le résultat et de réaliser une capture d'écran.
+
+Les autres :
+Les 18 autres méthodes sont : SetView, GetView, GetDefaultView, ResetView, IsViewCustom, SetViewport, GetViewport, SetResizePolicy, GetResizePolicy, GetDesignSize, GetSize, Draw(const NkIDrawable2D&), MapPixelToCoords, MapCoordsToPixel, GetRenderer() non constant, GetRenderer() constant, GetRenderer2D() non constant et GetRenderer2D() constant. Elles servent à gérer la vue, la zone d'affichage, le redimensionnement, les dimensions de la cible, les conversions entre pixels et coordonnées de la scène et l'accès au moteur de rendu. La surcharge Draw(const NkIDrawable2D&) assure la compatibilité avec l'ancienne interface 2D. Son commentaire précise qu'elle est provisoire et sera retirée après la migration de NkSprite et NkText vers NkDrawable.
+
+Le rapport :
+Les méthodes utiles représentent 6 méthodes sur 24, soit 25 % de l'interface. Les autres représentent 18 méthodes sur 24, soit 75 %. Le rapport entre les deux groupes est de 1 pour 3. La façade remplit son rôle en proposant les opérations essentielles de rendu, mais elle expose également de nombreuses fonctionnalités complémentaires qui rendent son interface plus large.

@@ -1,0 +1,45 @@
+Les crochets :
+
+La classe NkCanvasApp possède 12 hooks virtuels permettant de contrôler le déroulement de l'application :
+
+* OnCommandLine() : ligne 249.
+* OnInit() : ligne 255.
+* OnUpdate() : ligne 259.
+* OnRender() : ligne 262.
+* OnShutdown() : ligne 265.
+* OnEvent() : ligne 270.
+* OnPointer() : ligne 277.
+* OnKeyPress() : ligne 282.
+* OnLayout() : ligne 291.
+* OnCloseRequested() : ligne 314.
+* OnPause() : ligne 321.
+* OnResume() : ligne 323.
+
+L'ordre mesuré :
+
+Le journal d'exécution Release contient 24 appels. L'ordre observé est le suivant :
+
+1. OnCommandLine
+2. OnLayout
+3. OnInit
+   4 à 12. OnEvent (9 appels)
+4. OnUpdate (image 1)
+5. OnRender (image 1)
+6. OnUpdate (image 2)
+7. OnRender (image 2)
+8. OnUpdate (image 3)
+9. OnRender (image 3)
+10. OnUpdate (image 4)
+11. OnRender (image 4)
+12. OnUpdate (image 5)
+13. OnRender (image 5)
+14. OnShutdown
+15. OnPause
+
+Les surprises :
+
+Trois observations m'ont particulièrement surpris pendant l'exécution. Premièrement, OnLayout est appelé avant OnInit, alors que je pensais que l'initialisation se ferait en premier. Deuxièmement, OnEvent est appelé plusieurs fois avant le premier OnUpdate, car l'application reçoit des événements dès son démarrage. Troisièmement, OnPause apparaît après OnShutdown dans mon journal. Cet ordre correspond à ce que j'ai observé pendant cette exécution.
+
+Debug et Release :
+
+Les compilations Debug et Release ont réussi et les deux programmes se sont exécutés normalement. Les deux configurations ont enregistré 24 appels et atteint 5 images. En Debug, le temps final enregistré est de 0,066 seconde, tandis qu'en Release, il est de 0,069 seconde. Les résultats sont donc très proches, avec une légère différence de temps. Les hooks OnPointer, OnKeyPress, OnCloseRequested et OnResume n'ont pas été déclenchés pendant ces tests.

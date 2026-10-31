@@ -1,0 +1,14 @@
+Situations :
+
+1. Le joueur maintient la flèche droite : Pull. Le programme doit vérifier régulièrement si la touche est toujours enfoncée pour déplacer le joueur continuellement. API : NkInput.IsKeyDown(), dans NKEvent/NkEventDispatcher.h, ligne 273.
+2. Le joueur appuie sur Échap : Push. Il s'agit d'une action ponctuelle. Le programme reçoit un événement lorsqu'on appuie sur la touche. API : NkKeyPressEvent et OnKeyPress(), dans NKEvent/NkEvent.h, ligne 674, et NKCanvas/App/NkCanvasApp.h, ligne 282.
+3. On veut connaître la position actuelle de la souris : Pull. Le programme consulte régulièrement les coordonnées enregistrées dans l'état de la souris. API : GetMouse() et les champs x et y, dans NKEvent/NkEventState.h, lignes 563 à 566 et 1064.
+4. Un fichier est déposé sur la fenêtre : Push. Le programme reçoit une notification au moment du dépôt du fichier. API : NkDropFileEvent et Subscribe<NkDropFileEvent>(), dans NKEvent/NkDropEvent.h, lignes 373 à 388 et 738 à 740.
+5. La fenêtre est redimensionnée : Push. Le programme reçoit un événement lorsqu'un redimensionnement se produit. API : NkWindowResizeEvent, dans NKEvent/NkWindowEvent.h, ligne 453. Un exemple de traitement apparaît également dans NKEvent/NkEvent.h, lignes 811 et 812.
+6. Le joueur effectue un double-clic : Push. Le programme reçoit un événement spécifique lorsque le double-clic est détecté. API : NkMouseDoubleClickEvent, dans NKEvent/NkMouseEvent.h, lignes 684 à 700.
+
+Les deux bogues :
+
+1. Si on utilise Pull pour détecter une action ponctuelle, comme un double-clic ou le dépôt d'un fichier, on risque de manquer l'action si elle se produit entre deux vérifications.
+
+2. Si on utilise Push pour gérer une touche maintenue, comme la flèche droite, le déplacement risque de ne se produire qu'une seule fois au lieu de continuer tant que la touche reste enfoncée.

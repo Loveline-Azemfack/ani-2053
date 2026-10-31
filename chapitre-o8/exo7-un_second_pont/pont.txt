@@ -1,0 +1,14 @@
+Le premier pont :
+Le premier pont est NkGuiCanvasBackend. Il reçoit une liste de dessin NkGuiDrawList et un moteur de rendu NKCanvas. Il traduit les commandes de NKGui en appels au moteur pour afficher l'interface à l'écran. Il possède quatre principales méthodes publiques : Init, UploadFontGray8, UploadImageRGBA et Submit.
+
+Le second pont :
+Le second pont permettrait de produire le même rendu dans une image, sans afficher l'interface à l'écran. Il transforme les commandes de dessin en pixels RGBA8. Il peut ainsi fournir les pixels à un outil chargé d'enregistrer l'image au format PNG.
+
+Combien de méthodes :
+Dans le kit, NkGuiDrawListRaster possède huit méthodes publiques : Init, Effacer, PoserTexture, Rasteriser, Largeur, Hauteur, Pixels et Pixel. Les principales opérations consistent à initialiser l'image, définir sa couleur de fond, déclarer les textures et rasteriser la liste de dessin.
+
+Les données :
+Il a besoin de la liste de dessin, de la largeur et de la hauteur de l'image, ainsi que des textures utilisées. Pour chaque texture, il faut son identifiant, ses pixels, ses dimensions et son nombre de canaux. Il faut également prévoir la couleur de fond de l'image.
+
+Dans le kit :
+Le second pont existe déjà dans le kit. Il se trouve dans Canvas/include/NKGui/Core/NkGuiDrawListRaster.h. Il réalise un rendu logiciel hors écran et fournit les pixels RGBA8. L'enregistrement au format PNG doit être effectué séparément.

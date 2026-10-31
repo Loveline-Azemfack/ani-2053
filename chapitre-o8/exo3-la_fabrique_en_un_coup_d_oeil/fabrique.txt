@@ -1,0 +1,8 @@
+Recherche :
+La commande utilisée est Get-ChildItem $include -Recurse -File | Select-String -SimpleMatch "NkOpenGLRenderer2D". Elle recherche le nom NkOpenGLRenderer2D dans tous les fichiers du dossier include et ses sous-dossiers. La recherche trouve 5 fichiers distincts.
+
+Hors de son dossier :
+NkIRenderer2D.h:15 : commentaire présentant le chemin du backend OpenGL. NkRenderer2D.h:19 : commentaire citant les différents backends disponibles. NkTextureBackend.h:22, NkTextureBackend.h:24, NkTextureBackend.h:25, NkTextureBackend.h:26, NkTextureBackend.h:27 et NkTextureBackend.h:28 : commentaires montrant un exemple d'enregistrement des fonctions du backend OpenGL. NkGuiDrawListRaster.h:35 : commentaire faisant référence à la méthode SetBlendMode du backend OpenGL. Toutes ces occurrences sont des commentaires et non des instructions de code.
+
+Conclusion :
+Le fichier NkRenderer2DFactory.h ne cite directement aucune classe concrète de backend. Il utilise l'interface générale NkIRenderer2D et reçoit un contexte graphique NkIGraphicsContext. Cela montre que la fabrique permet au programme de manipuler un renderer à travers une interface commune, sans avoir à connaître directement la classe concrète du backend utilisé. Le choix et la création du backend ne sont pas détaillés dans ce fichier d'en-tête.
