@@ -1,0 +1,33 @@
+La promesse la plus forte :
+La promesse la plus forte est celle du const final
+applique a une methode membre. Elle garantit que la
+methode ne modifie pas l'etat observable de l'objet
+a travers cette methode.
+Par exemple, PixelToWorld() et GridSpacing() sont
+declarees const. Elles peuvent donc etre appelees
+sur un objet NkRefView constant.
+
+Le message du compilateur :
+Lorsque nous avons essaye d'appeler PanByPixels()
+sur l'objet constant vue, le compilateur a refuse
+la compilation. Le message obtenu etait :
+'this' argument to member function 'PanByPixels'
+has type 'const nkref::NkRefView', but function
+is not marked const.
+Cela signifie que PanByPixels() n'est pas declaree
+const. Le compilateur interdit donc son utilisation
+sur un objet constant.
+Cette methode modifie effectivement les membres
+center.x et center.y de NkRefView.
+
+Une promesse que la signature ne dit pas :
+Une signature ne garantit pas que le resultat
+d'un calcul est mathematiquement correct.
+Par exemple, PixelToWorld() est declaree const,
+mais cela ne garantit pas que les valeurs fournies
+en parametre sont valides.
+Elle ne verifie notamment pas si zoom est nul
+avant d'effectuer ses divisions.
+Ainsi, const garantit une restriction sur les
+modifications de l'objet, mais ne garantit pas
+a lui seul la correction de tous les calculs.

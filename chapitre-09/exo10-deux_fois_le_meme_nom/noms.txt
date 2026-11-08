@@ -1,0 +1,2 @@
+nom : NkEvent, fichier : Canvas/include/NKEvent/NkEvent.h, ligne : 434
+nom : NkEvent, fichier : Canvas/include/NKThreading/Synchronization/NkEvent.h, ligne : 79

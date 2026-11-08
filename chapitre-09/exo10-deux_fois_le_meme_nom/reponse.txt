@@ -1,0 +1,8 @@
+Le premier mérite-t-il le nom :
+Oui. La classe nkentseu::NkEvent représente un événement du système d'événements de Nkentseu. Son nom est cohérent avec son rôle général dans la gestion des événements. Il est donc pertinent de conserver ce nom pour cette classe.
+
+Le second mérite-t-il le nom :
+Oui, mais un nom plus précis serait préférable. La classe nkentseu::threading::NkEvent représente un événement utilisé pour la synchronisation entre les threads. Son rôle est différent de celui du premier NkEvent. Un nom comme NkThreadEvent permettrait de mieux distinguer sa fonction et d'éviter les conflits de noms.
+
+Le renommage le moins cher :
+Le comptage effectué dans les répertoires concernés révèle 23 fichiers et 468 lignes contenant NkEvent pour l'événement du système, contre 3 fichiers et 65 lignes pour l'événement de synchronisation. Renommer l'événement de synchronisation en NkThreadEvent serait donc la solution la moins coûteuse : cela concernerait 3 fichiers et environ 65 lignes, contre 23 fichiers et environ 468 lignes pour renommer le premier. Il est donc préférable de conserver nkentseu::NkEvent et de renommer l'événement de synchronisation.
