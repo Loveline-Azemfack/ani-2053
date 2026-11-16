@@ -1,0 +1,5 @@
+Format juste :
+bytes : 144, read back : YES, identical : YES
+
+Format casse :
+bytes : 144, read back : YES, identical : NO

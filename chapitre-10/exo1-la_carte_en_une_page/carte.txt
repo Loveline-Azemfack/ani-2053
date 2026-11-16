@@ -1,0 +1,5 @@
+file : NkRefView.h, lines : 86, includes : aucun
+file : NkRefBoard.h, lines : 371, includes : aucun
+file : NkRefFile.h, lines : 224, includes : NkRefBoard.h NkRefView.h
+file : main.cpp, lines : 2138, includes : NkRefView.h NkRefBoard.h NkRefFile.h
+commit : 93dfec7f5

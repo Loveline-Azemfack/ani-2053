@@ -1,0 +1,8 @@
+La ligne que j'ai changée :
+Dans la copie de NkRefFile.h, dans la fonction NkRefSerialize, j'ai remplacé le premier PutU8(out, 0) qui écrit l'octet de réserve après mirrorY par PutU8(out, 1).
+
+Ce que le test a vu :
+La désérialisation réussit, mais l'octet de réserve modifié est ignoré lors de la lecture. Lors de la seconde sérialisation, cet octet reprend la valeur 0. La comparaison octet par octet détecte donc une différence entre les deux fichiers.
+
+Ce que le test ne voit pas :
+Le test ne vérifie pas que chaque champ est écrit à la bonne position dans le format. Par exemple, remplacer l'écriture de pos.x par celle de pos.y peut produire deux fichiers identiques lors de l'aller-retour, même si la coordonnée enregistrée est incorrecte.
